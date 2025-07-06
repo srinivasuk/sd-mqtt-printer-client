@@ -187,11 +187,12 @@ class USBPrinterManager:
         try:
             logger.debug(f"🖨️ Starting receipt print", elements=len(receipt_data))
 
-            # Reset formatter state
+            # Initialize formatting state for new print job (like ESP32 firmware)
             self.formatter.reset_formatting()
-
-            # Initialize printer (ESC/POS doesn't need explicit init)
-            # self.printer.init()  # Not needed for ESC/POS USB printer
+            
+            # Apply initial formatting to printer (like ESP32 firmware initialization)
+            self._apply_current_format()
+            logger.debug("🎨 Format state initialized for new print job")
 
             # Process each element
             qr_printed = False
@@ -249,40 +250,76 @@ class USBPrinterManager:
             return False
 
     def _print_text_line(self, text: str):
-        """Print a text line with current formatting."""
+        """Print a text line with current formatting (like ESP32 firmware)."""
         if not text:
             # Empty line
             self.printer.text("\n")
             return
 
-        # Apply current formatting
-        if self.formatter.current_align == 'C':
-            self.printer.set_with_default(align='center')
-        elif self.formatter.current_align == 'R':
-            self.printer.set_with_default(align='right')
-        else:
-            self.printer.set_with_default(align='left')
-
-        # Apply text styling
-        if self.formatter.current_bold:
-            self.printer.set_with_default(bold=True)
-        else:
-            self.printer.set_with_default(bold=False)
-
-        # Apply size
-        if self.formatter.current_size == 2:
-            self.printer.set_with_default(double_height=True, double_width=True)
-        elif self.formatter.current_size == 0:
-            self.printer.set_with_default(double_height=False, double_width=False)
-        else:
-            self.printer.set_with_default(double_height=False, double_width=False)
-
-        # Print text
+        # Apply current persistent formatting state (like ESP32 applyCurrentFormat())
+        self._apply_current_format()
+        
+        # Print text with line ending
         self.printer.text(text + "\n")
+        
+        logger.debug(f"📝 Text printed with format - Align: {self.formatter.current_align}, "
+                    f"Bold: {'ON' if self.formatter.current_bold else 'OFF'}, "
+                    f"Size: {self.formatter.current_size}")
+
+    def _apply_current_format(self):
+        """Apply current persistent formatting state (like ESP32 firmware applyCurrentFormat)."""
+        # This function mirrors the ESP32 firmware's applyCurrentFormat() function
+        
+        # Apply alignment
+        if isinstance(self.printer, NamedPrinterWrapper):
+            # Use direct ESC/POS commands for named printers
+            self.printer.justify(self.formatter.current_align)
+            
+            # Apply bold
+            if self.formatter.current_bold:
+                self.printer.bold_on()
+            else:
+                self.printer.bold_off()
+                
+            # Apply size
+            self.printer.set_size(self.formatter.current_size)
+        else:
+            # Use python-escpos methods for USB printers
+            if self.formatter.current_align == 'C':
+                self.printer.set_with_default(align='center')
+            elif self.formatter.current_align == 'R':
+                self.printer.set_with_default(align='right')
+            else:
+                self.printer.set_with_default(align='left')
+
+            # Apply text styling
+            self.printer.set_with_default(bold=self.formatter.current_bold)
+
+            # Apply size
+            if self.formatter.current_size == 2:
+                self.printer.set_with_default(double_height=True, double_width=True)
+            elif self.formatter.current_size == 0:
+                self.printer.set_with_default(double_height=False, double_width=False)
+            else:
+                self.printer.set_with_default(double_height=False, double_width=False)
 
     def _apply_format(self, format_element: Dict[str, Any]):
-        """Apply formatting changes."""
+        """Apply formatting changes (like ESP32 firmware applyShortFormat)."""
         changes = self.formatter.apply_format(format_element)
+        
+        # Log format changes like ESP32 firmware
+        if changes:
+            if "align" in changes:
+                logger.debug(f"🎨 Format: Alignment changed to {changes['align']}")
+            if "bold" in changes:
+                logger.debug(f"🎨 Format: Bold changed to {'ON' if changes['bold'] else 'OFF'}")
+            if "size" in changes:
+                logger.debug(f"🎨 Format: Size changed to {changes['size']}")
+        
+        # Apply changes to printer immediately (persistent formatting)
+        if changes:
+            self._apply_current_format()
+            
         logger.debug(f"🎨 Format applied", changes=changes)
 
     def _print_line(self, line_element: Dict[str, Any]):
@@ -311,13 +348,28 @@ class USBPrinterManager:
             return
 
         try:
-            # Set alignment
-            if qr_data["alignment"] == "center":
-                self.printer.set_with_default(align='center')
-            elif qr_data["alignment"] == "right":
-                self.printer.set_with_default(align='right')
+            # Save current formatting state
+            saved_align = self.formatter.current_align
+            
+            # Set QR alignment
+            qr_align = 'C'  # Default center
+            if qr_data["alignment"] == "right":
+                qr_align = 'R'
+            elif qr_data["alignment"] == "left":
+                qr_align = 'L'
+            
+            # Temporarily change alignment for QR
+            self.formatter.current_align = qr_align
+            
+            if isinstance(self.printer, NamedPrinterWrapper):
+                self.printer.justify(qr_align)
             else:
-                self.printer.set_with_default(align='left')
+                if qr_align == 'C':
+                    self.printer.set_with_default(align='center')
+                elif qr_align == 'R':
+                    self.printer.set_with_default(align='right')
+                else:
+                    self.printer.set_with_default(align='left')
 
             if qr_data["type"] == "bitmap":
                 # Print bitmap QR code
@@ -326,12 +378,19 @@ class USBPrinterManager:
                 # Print URL QR code using ESC/POS QR command
                 self._print_qr_url(qr_data)
 
+            # Restore current formatting state (like ESP32 firmware)
+            self.formatter.current_align = saved_align
+            self._apply_current_format()
+
             logger.debug(f"🔲 QR code printed", type=qr_data["type"], size=qr_data["size"])
 
         except Exception as e:
             logger.error(f"❌ QR print error: {str(e)}")
             # Fallback: print QR URL as text
             self.printer.text("QR Code: " + qr_data.get("url", "N/A") + "\n")
+            
+            # Restore formatting after error
+            self._apply_current_format()
 
     def _print_qr_bitmap(self, qr_data: Dict[str, Any]):
         """Print QR code from bitmap data."""
@@ -484,39 +543,205 @@ class USBPrinterManager:
 
 
 class NamedPrinterWrapper:
-    """Wrapper for system printers accessed by name via lp command."""
+    """Wrapper for system printers accessed by name via lp command with ESC/POS support."""
 
+    # ESC/POS command constants
+    ESC = 0x1B
+    GS = 0x1D
+    LF = 0x0A
+    CR = 0x0D
+    
     def __init__(self, printer_name: str):
         self.printer_name = printer_name
+        self._buffer = b""
+        
+        # Track formatting state like ESP32 firmware
+        self.current_align = 'L'  # L=Left, C=Center, R=Right
+        self.current_bold = False
+        self.current_size = 1     # 1=Normal, 2=Large, 0=Small
+        self.current_font = 'A'   # A or B
+        
+        # Initialize with default settings (done later to avoid issues during construction)
+        self._initialized = False
 
     def init(self):
-        """Initialize printer (no-op for lp)."""
-        pass
+        """Initialize printer with ESC/POS commands."""
+        if self._initialized:
+            return
+            
+        # ESC @ - Initialize printer
+        self._raw(bytes([self.ESC, 0x40]))
+        
+        # Set default formatting
+        self.justify('L')
+        self.set_size(1)
+        self.set_font('A')
+        self.bold_off()
+        
+        self._initialized = True
 
     def text(self, text: str):
-        """Add text to print buffer."""
-        if not hasattr(self, '_buffer'):
-            self._buffer = b""
-        self._buffer += text.encode('utf-8')
+        """Add text to print buffer with current formatting applied."""
+        # Ensure printer is initialized
+        if not self._initialized:
+            self.init()
+            
+        # Convert text and handle line endings properly
+        text_bytes = text.encode('utf-8')
+        self._buffer += text_bytes
 
     def set_with_default(self, **kwargs):
-        """Set formatting (simplified for lp)."""
-        # For lp printers, we have limited formatting control
-        pass
+        """Set formatting based on kwargs (compatible with python-escpos)."""
+        # Handle alignment
+        if 'align' in kwargs:
+            align = kwargs['align']
+            if align == 'center':
+                self.justify('C')
+            elif align == 'right':
+                self.justify('R')
+            else:
+                self.justify('L')
+        
+        # Handle bold
+        if 'bold' in kwargs:
+            if kwargs['bold']:
+                self.bold_on()
+            else:
+                self.bold_off()
+        
+        # Handle size (double width/height)
+        if 'double_height' in kwargs or 'double_width' in kwargs:
+            double_height = kwargs.get('double_height', False)
+            double_width = kwargs.get('double_width', False)
+            
+            if double_height and double_width:
+                self.set_size(2)  # Large
+            elif double_height or double_width:
+                self.set_size(1)  # Medium (normal with one dimension doubled)
+            else:
+                self.set_size(1)  # Normal
+
+    def justify(self, alignment: str):
+        """Set text alignment using ESC/POS commands."""
+        alignment = alignment.upper()
+        if alignment != self.current_align:
+            self.current_align = alignment
+            
+            # ESC a n - Set justification
+            if alignment == 'C':
+                self._raw(bytes([self.ESC, ord('a'), 0x01]))  # Center
+            elif alignment == 'R':
+                self._raw(bytes([self.ESC, ord('a'), 0x02]))  # Right
+            else:
+                self._raw(bytes([self.ESC, ord('a'), 0x00]))  # Left
+
+    def bold_on(self):
+        """Turn on bold text."""
+        if not self.current_bold:
+            self.current_bold = True
+            # ESC E 1 - Turn on bold
+            self._raw(bytes([self.ESC, ord('E'), 0x01]))
+
+    def bold_off(self):
+        """Turn off bold text."""
+        if self.current_bold:
+            self.current_bold = False
+            # ESC E 0 - Turn off bold
+            self._raw(bytes([self.ESC, ord('E'), 0x00]))
+
+    def set_size(self, size: int):
+        """Set text size using ESC/POS commands."""
+        if size != self.current_size:
+            self.current_size = size
+            
+            # GS ! n - Set character size
+            if size == 2:
+                # Large: double width and height
+                self._raw(bytes([self.GS, ord('!'), 0x11]))
+            elif size == 0:
+                # Small: normal size (some printers support smaller fonts)
+                self._raw(bytes([self.GS, ord('!'), 0x00]))
+            else:
+                # Normal size
+                self._raw(bytes([self.GS, ord('!'), 0x00]))
+
+    def set_font(self, font: str):
+        """Set font type."""
+        font = font.upper()
+        if font != self.current_font:
+            self.current_font = font
+            
+            # ESC M n - Set font
+            if font == 'B':
+                self._raw(bytes([self.ESC, ord('M'), 0x01]))
+            else:
+                self._raw(bytes([self.ESC, ord('M'), 0x00]))
+
+    def _apply_current_formatting(self):
+        """Apply current formatting state (like ESP32 firmware applyCurrentFormat)."""
+        # This ensures formatting is applied before each text output
+        # Similar to ESP32 firmware's applyCurrentFormat() function
+        pass  # Formatting is already applied when state changes
 
     def qr(self, text: str, size: int = 6, center: bool = True):
-        """Print QR code (fallback to text for lp)."""
-        if center:
-            self.text(f"\n    QR: {text}\n\n")
-        else:
-            self.text(f"QR: {text}\n")
+        """Print QR code using ESC/POS QR commands or fallback to text."""
+        try:
+            # Center QR code if requested
+            if center:
+                old_align = self.current_align
+                self.justify('C')
+            
+            # Try ESC/POS QR code command
+            # GS ( k - QR Code commands
+            text_bytes = text.encode('utf-8')
+            text_len = len(text_bytes)
+            
+            # QR Code model
+            self._raw(bytes([self.GS, ord('('), ord('k'), 4, 0, 49, 65, 50, 0]))
+            
+            # QR Code size
+            qr_size = max(1, min(16, size))
+            self._raw(bytes([self.GS, ord('('), ord('k'), 3, 0, 49, 67, qr_size]))
+            
+            # QR Code error correction level
+            self._raw(bytes([self.GS, ord('('), ord('k'), 3, 0, 49, 69, 48]))
+            
+            # QR Code data
+            self._raw(bytes([self.GS, ord('('), ord('k'), text_len + 3, 0, 49, 80, 48]))
+            self._raw(text_bytes)
+            
+            # Print QR Code
+            self._raw(bytes([self.GS, ord('('), ord('k'), 3, 0, 49, 81, 48]))
+            
+            # Add some spacing
+            self._raw(bytes([self.LF, self.LF]))
+            
+            # Restore alignment
+            if center and old_align != 'C':
+                self.justify(old_align)
+                
+        except Exception as e:
+            logger.debug(f"QR command failed, using text fallback: {str(e)}")
+            # Fallback to text representation
+            if center:
+                self.text(f"\n    QR: {text}\n\n")
+            else:
+                self.text(f"QR: {text}\n")
 
     def cut(self):
-        """Cut paper (add extra spacing for lp)."""
-        self.text("\n\n\n")
+        """Cut paper using ESC/POS command."""
+        # Add some space before cutting
+        self._raw(bytes([self.LF, self.LF]))
+        
+        # GS V - Cut paper
+        # GS V 0 - Full cut
+        self._raw(bytes([self.GS, ord('V'), 0x00]))
+        
+        # Alternative: GS V 1 - Partial cut
+        # self._raw(bytes([self.GS, ord('V'), 0x01]))
 
     def _raw(self, data: bytes):
-        """Send raw data to printer."""
+        """Send raw data to printer buffer."""
         if not hasattr(self, '_buffer'):
             self._buffer = b""
         self._buffer += data
