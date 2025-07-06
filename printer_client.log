@@ -1,0 +1,43 @@
+2025-07-06 11:05:59,539 - printer_client - INFO - Info message test
+2025-07-06 11:05:59,539 - printer_client - WARNING - Warning message test
+2025-07-06 11:05:59,539 - printer_client - INFO - 🖨️ Print started | order_id=test_order | page=1 | total_pages=1
+2025-07-06 11:05:59,539 - printer_client - INFO - ✅ Print completed | order_id=test_order | page=1 | total_pages=1
+2025-07-06 11:06:16,620 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 11:06:16,620 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal1
+Printer: Gobbler_USB_Printer_on_Mac
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal1/pt/EE363AC5CF98/p
+- Status: vimal1/pt/EE363AC5CF98/a
+- Heartbeat: vimal1/pt/EE363AC5CF98/h
+- Error: vimal1/pt/EE363AC5CF98/e
+- Recovery: vimal1/pt/EE363AC5CF98/r
+
+2025-07-06 11:06:16,905 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.66
+2025-07-06 11:06:16,905 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 11:06:16,905 - printer_client - INFO - 🔌 Connecting to USB printer: Gobbler_USB_Printer_on_Mac
+2025-07-06 11:06:17,006 - printer_client - INFO - ✅ Connected to USB printer: 04b8:0202
+2025-07-06 11:06:17,006 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 11:06:17,006 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 11:06:17,017 - printer_client - ERROR - ❌ Print error: 'Usb' object has no attribute 'init'
+2025-07-06 11:06:17,017 - printer_client - WARNING - ⚠️ Printer test failed
+2025-07-06 11:06:17,017 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 11:06:17,017 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 11:06:17,137 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:06:17,137 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:06:17,206 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 11:06:17,207 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 11:06:17,207 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 11:06:17,207 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 11:06:17,207 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 11:06:17,207 - printer_client - INFO - 📡 Listening for print commands on: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:06:17,207 - printer_client - INFO - 💓 Sending heartbeats to: vimal1/pt/EE363AC5CF98/h
