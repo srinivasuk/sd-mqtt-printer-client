@@ -59,7 +59,10 @@ class Config:
 
         # Derived configurations
         self.PRINTER_ID = self.MAC_ADDRESS.replace(":", "")
-        self.CLIENT_ID = f"PrinterClient-{self.PRINTER_ID}"
+        # Add timestamp to make Client ID unique and avoid conflicts
+        import time
+        timestamp = int(time.time())
+        self.CLIENT_ID = f"PrinterClient-{self.PRINTER_ID}-{timestamp}"
 
         # MQTT Topics (same format as ESP32 firmware)
         self.TOPIC_PRINT = f"{self.MQTT_USERNAME}/pt/{self.PRINTER_ID}/p"

@@ -9,7 +9,7 @@ import sys
 from datetime import datetime
 from typing import Optional
 
-from config import config
+from ..config import config
 
 
 class ColoredFormatter(logging.Formatter):

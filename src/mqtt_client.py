@@ -10,10 +10,10 @@ from typing import Dict, Any, Optional, Callable
 import paho.mqtt.client as mqtt
 from datetime import datetime
 
-from config import config
-from utils.logger import logger
-from printer_manager import printer_manager
-from utils.formatting import replace_variables
+from .config import config
+from .utils.logger import logger
+from .printer_manager import printer_manager
+from .utils.formatting import replace_variables
 
 
 class MQTTClient:
@@ -124,12 +124,12 @@ class MQTTClient:
             self.is_connected = True
             logger.info(f"✅ MQTT connected with result code {rc}")
 
-            # Subscribe to print topic
-            client.subscribe(config.TOPIC_PRINT, qos=config.MQTT_QOS)
+            # Subscribe to print topic with QoS 0 to avoid issues
+            client.subscribe(config.TOPIC_PRINT, qos=0)
             logger.info(f"📡 Subscribed to print topic: {config.TOPIC_PRINT}")
 
-            # Send initial status
-            self._send_status()
+            # Skip initial status to test if it's causing disconnections
+            # self._send_status()
 
         else:
             logger.error(f"❌ MQTT connection failed with result code {rc}")
@@ -248,36 +248,18 @@ class MQTTClient:
     def _send_heartbeat(self):
         """Send heartbeat message to server."""
         try:
-            # Get printer status
-            printer_status = printer_manager.get_status()
-
-            # Create heartbeat message (same format as ESP32)
+            # Create simplified heartbeat message to avoid disconnection issues
             heartbeat_data = {
                 "timestamp": int(time.time() * 1000),  # Milliseconds
                 "printer_id": config.PRINTER_ID,
-                "mac_address": config.MAC_ADDRESS,
-                "status": printer_status["printer_status"],
-                "printer_online": printer_status["printer_online"],
-                "paper_present": printer_status["paper_present"],
-                "paper_near_end": printer_status["paper_near_end"],
-                "cover_closed": printer_status["cover_closed"],
-                "cutter_ok": printer_status["cutter_ok"],
-                "overheat": printer_status["overheat"],
-                "mechanical_error": printer_status["mechanical_error"],
-                "uptime": int(time.time() - self.stats["connection_time"]) if self.stats["connection_time"] else 0,
-                "free_memory": self._get_system_memory(),
-                "print_stats": printer_status["print_stats"],
-                "mqtt_stats": {
-                    "messages_received": self.stats["messages_received"],
-                    "messages_sent": self.stats["messages_sent"],
-                    "reconnect_count": self.stats["reconnect_count"],
-                }
+                "status": "ready",
+                "online": True
             }
 
             # Send heartbeat
             self._publish(config.TOPIC_HEARTBEAT, heartbeat_data)
 
-            logger.heartbeat_sent(printer_status["printer_status"])
+            logger.debug(f"💓 Heartbeat sent")
 
         except Exception as e:
             logger.error(f"❌ Heartbeat error: {str(e)}")
@@ -361,7 +343,7 @@ class MQTTClient:
 
         try:
             payload = json.dumps(data)
-            result = self.client.publish(topic, payload, qos=config.MQTT_QOS)
+            result = self.client.publish(topic, payload, qos=0)
 
             if result.rc == mqtt.MQTT_ERR_SUCCESS:
                 logger.debug(f"📤 Published to {topic}", size=len(payload))

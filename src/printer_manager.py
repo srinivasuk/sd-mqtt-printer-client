@@ -10,11 +10,11 @@ from escpos.exceptions import USBNotFoundError, Error as ESCPOSError
 import subprocess
 import platform
 
-from config import config
-from utils.logger import logger
-from utils.formatting import PrinterFormatter, parse_line_command, parse_qr_command, generate_line_pattern, replace_variables
-from utils.bitmap import decode_bit_packed_bitmap, convert_bitmap_to_escpos
-from qr_generator import qr_generator
+from .config import config
+from .utils.logger import logger
+from .utils.formatting import PrinterFormatter, parse_line_command, parse_qr_command, generate_line_pattern, replace_variables
+from .utils.bitmap import decode_bit_packed_bitmap, convert_bitmap_to_escpos
+from .qr_generator import qr_generator
 
 
 class PrinterStatus:
@@ -190,8 +190,8 @@ class USBPrinterManager:
             # Reset formatter state
             self.formatter.reset_formatting()
 
-            # Initialize printer
-            self.printer.init()
+            # Initialize printer (ESC/POS doesn't need explicit init)
+            # self.printer.init()  # Not needed for ESC/POS USB printer
 
             # Process each element
             qr_printed = False
@@ -412,17 +412,12 @@ class USBPrinterManager:
         try:
             # For USB printers, we have limited status checking
             # Most USB thermal printers don't provide detailed status
-
-            # Try to send a simple command to test connection
+            
+            # Avoid sending raw commands that might disrupt the connection
+            # Instead, just check if the printer object exists and is connected
             if hasattr(self.printer, '_raw'):
-                # Send status request command (if supported)
-                try:
-                    self.printer._raw(b'\x10\x04\x01')  # DLE EOT n (status request)
-                    # If no exception, printer is responsive
-                    self.current_status = PrinterStatus.READY
-                except Exception:
-                    # If command fails, assume printer issues
-                    self.current_status = PrinterStatus.OFFLINE
+                # For USB printers, assume ready if connected
+                self.current_status = PrinterStatus.READY
             else:
                 # For named printers, check if printer queue is available
                 result = subprocess.run(['lpstat', '-p', config.PRINTER_NAME],

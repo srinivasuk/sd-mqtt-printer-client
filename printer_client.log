@@ -41,3 +41,1499 @@ Topics:
 2025-07-06 11:06:17,207 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
 2025-07-06 11:06:17,207 - printer_client - INFO - 📡 Listening for print commands on: vimal1/pt/EE363AC5CF98/p
 2025-07-06 11:06:17,207 - printer_client - INFO - 💓 Sending heartbeats to: vimal1/pt/EE363AC5CF98/h
+2025-07-06 11:22:51,855 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 11:22:51,855 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal1
+Printer: Gobbler_USB_Printer_on_Mac
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal1/pt/EE363AC5CF98/p
+- Status: vimal1/pt/EE363AC5CF98/a
+- Heartbeat: vimal1/pt/EE363AC5CF98/h
+- Error: vimal1/pt/EE363AC5CF98/e
+- Recovery: vimal1/pt/EE363AC5CF98/r
+
+2025-07-06 11:22:52,129 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.57
+2025-07-06 11:22:52,129 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 11:22:52,129 - printer_client - INFO - 🔌 Connecting to USB printer: Gobbler_USB_Printer_on_Mac
+2025-07-06 11:22:52,228 - printer_client - INFO - ✅ Connected to USB printer: 04b8:0202
+2025-07-06 11:22:52,228 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 11:22:52,228 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 11:22:52,240 - printer_client - ERROR - ❌ Print error: 'Usb' object has no attribute 'init'
+2025-07-06 11:22:52,240 - printer_client - WARNING - ⚠️ Printer test failed
+2025-07-06 11:22:52,240 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 11:22:52,240 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 11:22:52,371 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:22:52,372 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:22:52,443 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 11:22:52,444 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 11:22:52,444 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 11:22:52,444 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 11:22:52,444 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 11:22:52,444 - printer_client - INFO - 📡 Listening for print commands on: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:22:52,444 - printer_client - INFO - 💓 Sending heartbeats to: vimal1/pt/EE363AC5CF98/h
+2025-07-06 11:22:55,695 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 11:22:57,448 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 11:22:57,511 - printer_client - INFO - 🔌 MQTT disconnected gracefully
+2025-07-06 11:22:57,512 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 11:22:57,512 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 11:22:57,512 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 11:30:23,323 - printer_client - INFO - Info message test
+2025-07-06 11:30:23,323 - printer_client - WARNING - Warning message test
+2025-07-06 11:30:23,323 - printer_client - INFO - 🖨️ Print started | order_id=test_order | page=1 | total_pages=1
+2025-07-06 11:30:23,323 - printer_client - INFO - ✅ Print completed | order_id=test_order | page=1 | total_pages=1
+2025-07-06 11:36:47,923 - printer_client - INFO - Info message test
+2025-07-06 11:36:47,924 - printer_client - WARNING - Warning message test
+2025-07-06 11:36:47,924 - printer_client - INFO - 🖨️ Print started | order_id=test_order | page=1 | total_pages=1
+2025-07-06 11:36:47,924 - printer_client - INFO - ✅ Print completed | order_id=test_order | page=1 | total_pages=1
+2025-07-06 11:39:11,839 - printer_client - INFO - Info message test
+2025-07-06 11:39:11,839 - printer_client - WARNING - Warning message test
+2025-07-06 11:39:11,839 - printer_client - INFO - 🖨️ Print started | order_id=test_order | page=1 | total_pages=1
+2025-07-06 11:39:11,839 - printer_client - INFO - ✅ Print completed | order_id=test_order | page=1 | total_pages=1
+2025-07-06 11:46:40,562 - printer_client - INFO - Info message test
+2025-07-06 11:46:40,563 - printer_client - WARNING - Warning message test
+2025-07-06 11:46:40,563 - printer_client - INFO - 🖨️ Print started | order_id=test_order | page=1 | total_pages=1
+2025-07-06 11:46:40,563 - printer_client - INFO - ✅ Print completed | order_id=test_order | page=1 | total_pages=1
+2025-07-06 11:46:52,881 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 11:46:52,881 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal1
+Printer: Gobbler_USB_Printer_on_Mac
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal1/pt/EE363AC5CF98/p
+- Status: vimal1/pt/EE363AC5CF98/a
+- Heartbeat: vimal1/pt/EE363AC5CF98/h
+- Error: vimal1/pt/EE363AC5CF98/e
+- Recovery: vimal1/pt/EE363AC5CF98/r
+
+2025-07-06 11:46:52,887 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.56
+2025-07-06 11:46:52,887 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 11:46:52,887 - printer_client - INFO - 🔌 Connecting to USB printer: Gobbler_USB_Printer_on_Mac
+2025-07-06 11:46:52,974 - printer_client - INFO - ✅ Connected to USB printer: 04b8:0202
+2025-07-06 11:46:52,975 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 11:46:52,975 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 11:46:52,984 - printer_client - ERROR - ❌ Print error: 'Usb' object has no attribute 'init'
+2025-07-06 11:46:52,984 - printer_client - WARNING - ⚠️ Printer test failed
+2025-07-06 11:46:52,984 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 11:46:52,984 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 11:46:53,098 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:46:53,098 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:46:53,169 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 11:46:53,170 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 11:46:53,170 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 11:46:53,170 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 11:46:53,170 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 11:46:53,170 - printer_client - INFO - 📡 Listening for print commands on: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:46:53,170 - printer_client - INFO - 💓 Sending heartbeats to: vimal1/pt/EE363AC5CF98/h
+2025-07-06 11:47:20,562 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 11:47:20,563 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal1
+Printer: Gobbler_USB_Printer_on_Mac
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal1/pt/EE363AC5CF98/p
+- Status: vimal1/pt/EE363AC5CF98/a
+- Heartbeat: vimal1/pt/EE363AC5CF98/h
+- Error: vimal1/pt/EE363AC5CF98/e
+- Recovery: vimal1/pt/EE363AC5CF98/r
+
+2025-07-06 11:47:20,568 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.56
+2025-07-06 11:47:20,568 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 11:47:20,568 - printer_client - INFO - 🔌 Connecting to USB printer: Gobbler_USB_Printer_on_Mac
+2025-07-06 11:47:20,652 - printer_client - INFO - ✅ Connected to USB printer: 04b8:0202
+2025-07-06 11:47:20,652 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 11:47:20,652 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 11:47:20,662 - printer_client - ERROR - ❌ Print error: 'Usb' object has no attribute 'init'
+2025-07-06 11:47:20,662 - printer_client - WARNING - ⚠️ Printer test failed
+2025-07-06 11:47:20,663 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 11:47:20,663 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 11:47:20,736 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:47:20,736 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:47:20,736 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:20,807 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 11:47:20,808 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 11:47:20,808 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 11:47:20,808 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 11:47:20,808 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 11:47:20,808 - printer_client - INFO - 📡 Listening for print commands on: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:20,808 - printer_client - INFO - 💓 Sending heartbeats to: vimal1/pt/EE363AC5CF98/h
+2025-07-06 11:47:21,812 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:47:21,813 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:47:21,813 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:22,883 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:47:22,883 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:47:22,883 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:23,190 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 11:47:23,190 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 11:47:23,885 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 11:47:25,889 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 11:47:25,959 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:47:25,959 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:47:25,959 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:26,029 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 11:47:26,029 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 11:47:26,029 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 11:47:27,032 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:47:27,033 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:47:27,034 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:28,116 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:47:28,116 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:47:28,117 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:29,190 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:47:29,191 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:47:29,191 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:30,264 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:47:30,264 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:47:30,265 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:30,815 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 11:47:30,816 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 11:47:31,266 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 11:47:33,271 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 11:47:33,342 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:47:33,342 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:47:33,342 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:33,409 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 11:47:33,410 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 11:47:33,410 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 11:47:34,414 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:47:34,414 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:47:34,415 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:35,490 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:47:35,490 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:47:35,490 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:35,694 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 11:47:36,039 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 11:47:36,040 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 11:47:36,327 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 11:47:36,496 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 11:47:36,517 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 11:47:36,664 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 11:47:36,802 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 11:47:36,907 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 11:47:37,073 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 11:47:38,414 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 11:47:38,501 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 11:47:38,566 - printer_client - INFO - 🔌 MQTT disconnected gracefully
+2025-07-06 11:47:38,567 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 11:47:38,567 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 11:47:38,567 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 11:47:38,573 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:47:38,573 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:47:38,637 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 11:47:38,638 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 11:47:38,638 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 11:58:16,622 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 11:58:16,622 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal1
+Printer: Gobbler_USB_Printer_on_Mac
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal1/pt/EE363AC5CF98/p
+- Status: vimal1/pt/EE363AC5CF98/a
+- Heartbeat: vimal1/pt/EE363AC5CF98/h
+- Error: vimal1/pt/EE363AC5CF98/e
+- Recovery: vimal1/pt/EE363AC5CF98/r
+
+2025-07-06 11:58:16,628 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.56
+2025-07-06 11:58:16,628 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 11:58:16,628 - printer_client - INFO - 🔌 Connecting to USB printer: Gobbler_USB_Printer_on_Mac
+2025-07-06 11:58:16,717 - printer_client - INFO - ✅ Connected to USB printer: 04b8:0202
+2025-07-06 11:58:16,717 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 11:58:16,718 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 11:58:16,727 - printer_client - ERROR - ❌ Print error: 'Usb' object has no attribute 'init'
+2025-07-06 11:58:16,727 - printer_client - WARNING - ⚠️ Printer test failed
+2025-07-06 11:58:16,727 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 11:58:16,727 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 11:58:16,852 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:58:16,853 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:58:16,853 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:58:16,916 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 11:58:16,916 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 11:58:16,917 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 11:58:16,917 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 11:58:16,917 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 11:58:16,917 - printer_client - INFO - 📡 Listening for print commands on: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:58:16,917 - printer_client - INFO - 💓 Sending heartbeats to: vimal1/pt/EE363AC5CF98/h
+2025-07-06 11:58:17,927 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:58:17,927 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:58:17,927 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:58:19,003 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:58:19,003 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:58:19,004 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:58:19,105 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 11:58:19,105 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 11:58:19,191 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 11:58:20,008 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 11:58:21,922 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 11:58:22,014 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 11:58:22,082 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 11:58:22,082 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 11:58:22,082 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 11:58:22,082 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 11:58:22,082 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 11:58:22,082 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 11:58:22,155 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 11:58:22,155 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 11:58:22,155 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:04:49,090 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:04:49,090 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal1
+Printer: Gobbler_USB_Printer_on_Mac
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal1/pt/EE363AC5CF98/p
+- Status: vimal1/pt/EE363AC5CF98/a
+- Heartbeat: vimal1/pt/EE363AC5CF98/h
+- Error: vimal1/pt/EE363AC5CF98/e
+- Recovery: vimal1/pt/EE363AC5CF98/r
+
+2025-07-06 12:04:49,097 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.55
+2025-07-06 12:04:49,097 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:04:49,097 - printer_client - INFO - 🔌 Connecting to USB printer: Gobbler_USB_Printer_on_Mac
+2025-07-06 12:04:49,183 - printer_client - INFO - ✅ Connected to USB printer: 04b8:0202
+2025-07-06 12:04:49,183 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:04:49,183 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 12:04:49,192 - printer_client - ERROR - ❌ Print error: 'Usb' object has no attribute 'init'
+2025-07-06 12:04:49,192 - printer_client - WARNING - ⚠️ Printer test failed
+2025-07-06 12:04:49,192 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:04:49,192 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:04:49,304 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:04:49,304 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:04:49,305 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:04:49,371 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:04:49,371 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:04:49,372 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:04:49,372 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:04:49,372 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:04:49,372 - printer_client - INFO - 📡 Listening for print commands on: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:04:49,372 - printer_client - INFO - 💓 Sending heartbeats to: vimal1/pt/EE363AC5CF98/h
+2025-07-06 12:04:50,381 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:04:50,381 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:04:50,381 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:04:51,456 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:04:51,456 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:04:51,456 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:04:52,422 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:04:52,422 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:04:52,461 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:04:54,466 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:04:54,537 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:04:54,537 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:04:54,537 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:04:54,609 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:04:54,610 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:04:54,610 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:04:54,829 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:04:55,612 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:04:55,613 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:04:55,613 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:04:56,682 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:04:56,682 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:04:56,682 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:04:57,752 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:04:57,752 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:04:57,753 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:04:58,822 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:04:58,822 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:04:58,822 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:04:59,378 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:04:59,823 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:04:59,823 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:04:59,823 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:05:02,202 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:05:02,202 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal1
+Printer: Gobbler_USB_Printer_on_Mac
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal1/pt/EE363AC5CF98/p
+- Status: vimal1/pt/EE363AC5CF98/a
+- Heartbeat: vimal1/pt/EE363AC5CF98/h
+- Error: vimal1/pt/EE363AC5CF98/e
+- Recovery: vimal1/pt/EE363AC5CF98/r
+
+2025-07-06 12:05:02,208 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.55
+2025-07-06 12:05:02,208 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:05:02,208 - printer_client - INFO - 🔌 Connecting to USB printer: Gobbler_USB_Printer_on_Mac
+2025-07-06 12:05:02,291 - printer_client - INFO - ✅ Connected to USB printer: 04b8:0202
+2025-07-06 12:05:02,292 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:05:02,292 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 12:05:02,302 - printer_client - ERROR - ❌ Print error: 'Usb' object has no attribute 'init'
+2025-07-06 12:05:02,302 - printer_client - WARNING - ⚠️ Printer test failed
+2025-07-06 12:05:02,302 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:05:02,302 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:05:02,374 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:02,374 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:02,374 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:02,444 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:05:02,445 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:05:02,445 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:05:02,445 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:05:02,445 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:05:02,445 - printer_client - INFO - 📡 Listening for print commands on: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:02,445 - printer_client - INFO - 💓 Sending heartbeats to: vimal1/pt/EE363AC5CF98/h
+2025-07-06 12:05:03,450 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:03,450 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:03,450 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:04,520 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:04,520 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:04,521 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:04,618 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:05:04,618 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:05:05,525 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:05:07,531 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:05:07,604 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:07,604 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:07,604 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:07,673 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:05:07,674 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:05:07,674 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:05:08,675 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:08,675 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:08,676 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:09,749 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:09,749 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:09,751 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:10,823 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:10,823 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:10,823 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:11,896 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:11,897 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:11,897 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:12,452 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:05:12,452 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:05:12,899 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:05:14,904 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:05:14,977 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:14,977 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:14,978 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:15,046 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:05:15,046 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:05:15,047 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:05:16,052 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:16,052 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:16,053 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:17,128 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:17,128 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:17,129 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:17,679 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:05:17,679 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:05:18,134 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:05:20,138 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:05:20,213 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:20,214 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:20,214 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:20,277 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:05:20,278 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:05:20,278 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:05:21,286 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:21,286 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:21,287 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:22,359 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:22,359 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:22,359 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:23,431 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:23,431 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:23,432 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:24,512 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:24,512 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:24,513 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:25,054 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:05:25,054 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:05:25,518 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:05:27,520 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:05:27,589 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:27,589 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:27,589 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:27,657 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:05:27,658 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:05:27,658 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:05:28,664 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:28,664 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:28,664 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:29,737 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:29,737 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:29,738 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:30,160 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:05:30,289 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:05:30,289 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:05:30,743 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:05:32,661 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:05:32,749 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:05:32,819 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:05:32,819 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:05:32,819 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:05:32,819 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:05:32,819 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:05:32,819 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:05:32,887 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:05:32,887 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:05:32,887 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:06:09,793 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:06:09,793 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: Gobbler_USB_Printer_on_Mac
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:06:09,798 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.56
+2025-07-06 12:06:09,798 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:06:09,798 - printer_client - INFO - 🔌 Connecting to USB printer: Gobbler_USB_Printer_on_Mac
+2025-07-06 12:06:09,880 - printer_client - INFO - ✅ Connected to USB printer: 04b8:0202
+2025-07-06 12:06:09,881 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:06:09,881 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 12:06:09,890 - printer_client - ERROR - ❌ Print error: 'Usb' object has no attribute 'init'
+2025-07-06 12:06:09,890 - printer_client - WARNING - ⚠️ Printer test failed
+2025-07-06 12:06:09,890 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:06:09,891 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:06:09,961 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:06:09,961 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:06:09,961 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:06:10,031 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:06:10,032 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:06:10,032 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:06:10,033 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:06:10,033 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:06:10,033 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:06:10,033 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:06:11,037 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:06:11,037 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:06:11,037 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:06:12,113 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:06:12,113 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:06:12,113 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:06:12,910 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:06:12,911 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:06:13,119 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:06:15,122 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:06:15,195 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:06:15,195 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:06:15,196 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:06:15,261 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:06:15,262 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:06:15,262 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:06:16,275 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:06:16,276 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:06:16,277 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:06:17,287 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:06:17,351 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:06:17,351 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:06:17,352 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:06:18,426 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:06:18,426 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:06:18,427 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:06:19,499 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:06:19,499 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:06:19,500 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:06:20,037 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:06:20,500 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:06:20,501 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:06:20,501 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:12:16,592 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:12:16,592 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: Gobbler_USB_Printer_on_Mac
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:12:16,598 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.56
+2025-07-06 12:12:16,598 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:12:16,598 - printer_client - INFO - 🔌 Connecting to USB printer: Gobbler_USB_Printer_on_Mac
+2025-07-06 12:12:16,682 - printer_client - INFO - ✅ Connected to USB printer: 04b8:0202
+2025-07-06 12:12:16,682 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:12:16,682 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 12:12:16,700 - printer_client - ERROR - ❌ Error processing element 1: No backend available
+2025-07-06 12:12:16,701 - printer_client - ERROR - ❌ Error processing element 3: 
+2025-07-06 12:12:16,701 - printer_client - ERROR - ❌ Error processing element 4: 
+2025-07-06 12:12:16,701 - printer_client - ERROR - ❌ Error processing element 5: 
+2025-07-06 12:12:16,701 - printer_client - ERROR - ❌ Error processing element 6: 
+2025-07-06 12:12:16,701 - printer_client - ERROR - ❌ Error processing element 7: 
+2025-07-06 12:12:16,701 - printer_client - ERROR - ❌ Error processing element 8: 
+2025-07-06 12:12:16,701 - printer_client - ERROR - ❌ Error processing element 9: 
+2025-07-06 12:12:16,702 - printer_client - ERROR - ❌ Error processing element 11: 
+2025-07-06 12:12:16,702 - printer_client - ERROR - ❌ Error processing element 12: 
+2025-07-06 12:12:16,702 - printer_client - ERROR - ❌ QR print error: 
+2025-07-06 12:12:16,702 - printer_client - ERROR - ❌ Error processing element 13: 
+2025-07-06 12:12:16,702 - printer_client - ERROR - ❌ Error processing element 14: 
+2025-07-06 12:12:16,702 - printer_client - ERROR - ❌ Error processing element 16: 
+2025-07-06 12:12:16,702 - printer_client - ERROR - ❌ Error processing element 18: 
+2025-07-06 12:12:16,702 - printer_client - ERROR - ❌ Print error: 
+2025-07-06 12:12:16,702 - printer_client - WARNING - ⚠️ Printer test failed
+2025-07-06 12:12:16,702 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:12:16,702 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:12:16,815 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:12:16,816 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:12:16,816 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:12:16,888 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:12:16,888 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:12:16,888 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:12:16,889 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:12:16,889 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:12:16,889 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:12:16,889 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:12:17,891 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:12:17,891 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:12:17,891 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:12:18,968 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:12:18,968 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:12:18,968 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:12:20,041 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:12:20,041 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:12:20,041 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:12:21,117 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:12:21,117 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:12:21,117 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:12:21,772 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:12:21,894 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:12:22,190 - printer_client - INFO - 🔌 MQTT disconnected gracefully
+2025-07-06 12:12:22,190 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:12:22,190 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:12:22,190 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:12:22,195 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:12:22,195 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:13:54,352 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:13:54,352 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: Gobbler_USB_Printer_on_Mac
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:13:54,358 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.56
+2025-07-06 12:13:54,358 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:13:54,358 - printer_client - INFO - 🔌 Connecting to USB printer: Gobbler_USB_Printer_on_Mac
+2025-07-06 12:13:54,441 - printer_client - INFO - ✅ Connected to USB printer: 04b8:0202
+2025-07-06 12:13:54,441 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:13:54,442 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 12:13:54,460 - printer_client - ERROR - ❌ Error processing element 1: No backend available
+2025-07-06 12:13:54,461 - printer_client - ERROR - ❌ Error processing element 3: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Error processing element 4: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Error processing element 5: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Error processing element 6: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Error processing element 7: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Error processing element 8: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Error processing element 9: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Error processing element 11: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Error processing element 12: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ QR print error: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Error processing element 13: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Error processing element 14: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Error processing element 16: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Error processing element 18: 
+2025-07-06 12:13:54,462 - printer_client - ERROR - ❌ Print error: 
+2025-07-06 12:13:54,462 - printer_client - WARNING - ⚠️ Printer test failed
+2025-07-06 12:13:54,462 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:13:54,462 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:13:54,575 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:13:54,575 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:13:54,575 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:13:54,646 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:13:54,646 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:13:54,647 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:13:54,647 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:13:54,647 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:13:54,647 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:13:54,647 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:13:55,584 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:13:55,585 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:13:55,615 - printer_client - INFO - 🔌 MQTT disconnected gracefully
+2025-07-06 12:13:55,615 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:13:55,649 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:13:56,727 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:13:56,728 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:13:57,616 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:13:57,687 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:13:57,687 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:13:57,687 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:13:57,755 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:13:57,756 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:13:57,756 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:13:58,762 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:13:58,762 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:13:58,762 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:13:59,052 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:13:59,651 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:13:59,834 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:13:59,835 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:13:59,835 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:13:59,835 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:13:59,835 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:13:59,835 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:27:37,553 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:38,543 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:27:38,544 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:27:38,558 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:27:40,560 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:27:40,688 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:40,689 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:27:40,758 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:27:40,760 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:27:40,760 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:27:47,247 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:27:47,247 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: gobbler_80mm_Series
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:27:47,254 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.52
+2025-07-06 12:27:47,254 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:27:47,254 - printer_client - INFO - 🔌 Connecting to USB printer: gobbler_80mm_Series
+2025-07-06 12:27:47,287 - printer_client - INFO - ✅ Connected to printer: gobbler_80mm_Series
+2025-07-06 12:27:47,287 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:27:47,287 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 12:27:47,298 - printer_client - INFO - ✅ Receipt printed successfully
+2025-07-06 12:27:47,299 - printer_client - INFO - ✅ Printer test successful
+2025-07-06 12:27:47,299 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:27:47,299 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:27:47,371 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:47,374 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:47,374 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:27:47,439 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:27:47,439 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:27:47,439 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:27:47,439 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:27:47,439 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:27:47,440 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:27:47,440 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:27:48,448 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:48,448 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:48,449 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:27:49,523 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:49,523 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:49,523 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:27:50,612 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:50,612 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:50,612 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:27:51,686 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:51,686 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:51,687 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:27:52,763 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:52,763 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:52,763 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:27:53,836 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:53,836 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:53,836 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:27:54,328 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:27:54,328 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: gobbler_80mm_Series
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 300s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:27:54,334 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.52
+2025-07-06 12:27:54,334 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:27:54,334 - printer_client - INFO - 🔌 Connecting to USB printer: gobbler_80mm_Series
+2025-07-06 12:27:54,378 - printer_client - INFO - ✅ Connected to printer: gobbler_80mm_Series
+2025-07-06 12:27:54,379 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:27:54,379 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 12:27:54,428 - printer_client - INFO - ✅ Receipt printed successfully
+2025-07-06 12:27:54,430 - printer_client - INFO - ✅ Printer test successful
+2025-07-06 12:27:54,430 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:27:54,430 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:27:54,511 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:54,511 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:27:54,512 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:54,586 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:27:54,587 - printer_client - INFO - 💓 Heartbeat started (interval: 300s)
+2025-07-06 12:27:54,587 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:27:54,587 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:27:54,587 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:27:54,587 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:27:54,587 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:27:54,908 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:54,909 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:54,909 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:27:55,586 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:55,586 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:55,586 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:27:55,771 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:27:55,771 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:27:55,981 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:55,981 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:55,981 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:27:56,591 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:27:57,056 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:57,056 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:57,056 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:27:58,129 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:58,129 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:58,130 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:27:58,592 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:27:58,662 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:58,662 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:58,662 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:27:58,730 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:27:58,730 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:27:58,731 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:27:59,204 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:27:59,204 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:27:59,204 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:27:59,588 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:27:59,588 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:27:59,664 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:28:00,276 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:00,276 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:00,277 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:00,862 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:28:01,349 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:01,349 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:01,350 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:01,668 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:28:01,747 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:01,747 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:01,747 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:01,819 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:28:01,820 - printer_client - INFO - 💓 Heartbeat started (interval: 300s)
+2025-07-06 12:28:01,820 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:28:02,420 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:02,420 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:02,421 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:02,451 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:28:02,452 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:28:02,753 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:28:03,496 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:03,496 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:03,497 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:03,732 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:28:03,732 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:28:04,500 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:28:04,754 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:28:04,824 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:04,824 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:04,825 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:04,893 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:28:04,893 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:28:04,893 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:28:05,900 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:05,900 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:05,901 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:06,505 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:28:06,573 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:06,573 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:06,574 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:06,643 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:28:06,643 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:28:06,644 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:28:06,825 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:28:06,969 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:06,970 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:06,970 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:07,577 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:28:07,640 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:28:07,640 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:28:08,045 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:08,045 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:08,045 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:09,119 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:09,119 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:09,119 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:10,190 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:10,190 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:10,190 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:11,264 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:11,264 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:11,264 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:11,649 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:28:11,650 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:28:12,266 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:28:14,268 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:28:14,339 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:14,339 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:14,339 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:14,409 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:28:14,409 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:28:14,409 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:28:14,900 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:28:14,901 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:28:15,343 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:28:17,349 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:28:17,420 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:17,420 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:17,420 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:17,486 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:28:17,487 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:28:17,487 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:28:18,490 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:18,490 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:18,491 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:19,563 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:19,563 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:19,563 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:20,637 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:20,637 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:20,637 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:21,708 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:21,708 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:21,709 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:22,783 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:22,783 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:22,784 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:23,857 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:23,857 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:23,857 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:24,417 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:28:24,418 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:28:24,862 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:28:26,865 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:28:26,935 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:26,935 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:26,935 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:27,005 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:28:27,006 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:28:27,006 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:28:27,493 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:28:27,493 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:28:27,938 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:28:29,944 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:28:30,018 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:30,018 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:30,018 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:30,090 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:28:30,090 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:28:30,090 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:28:31,091 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:31,091 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:31,092 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:32,174 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:32,175 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:32,176 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:33,250 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:33,250 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:33,251 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:34,325 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:34,326 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:34,326 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:35,399 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:35,399 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:35,400 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:36,475 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:36,475 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:36,476 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:37,014 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:28:37,014 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:28:37,480 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:28:39,482 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:28:39,553 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:39,553 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:39,554 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:39,625 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:28:39,625 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:28:39,625 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:28:40,100 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:28:40,100 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:28:40,555 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:28:42,561 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:28:42,631 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:42,631 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:42,632 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:42,703 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:28:42,704 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:28:42,704 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:28:43,708 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:43,708 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:43,709 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:44,783 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:44,783 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:44,784 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:45,859 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:45,859 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:45,859 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:46,933 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:46,933 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:46,934 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:48,008 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:48,008 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:48,010 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:49,085 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:49,085 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:49,086 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:49,632 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:28:49,632 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:28:50,087 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:28:52,093 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:28:52,166 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:52,166 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:52,166 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:52,235 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:28:52,236 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:28:52,236 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:28:52,710 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:28:52,710 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:28:53,167 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:28:55,173 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:28:55,243 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:55,243 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:55,244 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:55,314 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:28:55,315 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:28:55,315 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:28:56,318 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:56,318 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:56,319 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:57,392 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:57,392 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:57,392 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:28:57,408 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:28:58,464 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:58,465 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:58,465 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:28:59,541 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:28:59,541 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:28:59,542 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:29:00,318 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:29:00,617 - printer_client - INFO - 🔌 MQTT disconnected gracefully
+2025-07-06 12:29:00,618 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:29:00,619 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:29:00,620 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:29:00,665 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:29:00,666 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:29:37,656 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:29:37,656 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: gobbler_80mm_Series
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:29:37,662 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.52
+2025-07-06 12:29:37,662 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:29:37,662 - printer_client - INFO - 🔌 Connecting to USB printer: gobbler_80mm_Series
+2025-07-06 12:29:37,681 - printer_client - INFO - ✅ Connected to printer: gobbler_80mm_Series
+2025-07-06 12:29:37,681 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:29:37,681 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 12:29:37,693 - printer_client - INFO - ✅ Receipt printed successfully
+2025-07-06 12:29:37,693 - printer_client - INFO - ✅ Printer test successful
+2025-07-06 12:29:37,693 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:29:37,693 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:29:37,764 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:29:37,764 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:29:37,764 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:29:37,835 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:29:37,836 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:29:37,836 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:29:37,836 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:29:37,836 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:29:37,836 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:29:37,836 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:29:38,839 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:29:38,839 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:29:38,839 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:29:39,913 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:29:39,913 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:29:39,914 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:29:40,883 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:29:40,986 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:29:40,986 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:29:40,987 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:29:42,057 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:29:42,057 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:29:42,058 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:29:42,271 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:29:42,272 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:29:42,841 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:29:43,063 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:29:43,135 - printer_client - INFO - 🔌 MQTT disconnected gracefully
+2025-07-06 12:29:43,135 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:29:43,181 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:29:43,181 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:29:45,067 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:29:45,135 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:29:45,136 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:29:45,206 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:29:45,207 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:29:45,207 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:31:18,163 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:31:18,163 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: gobbler_80mm_Series
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:31:18,169 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.52
+2025-07-06 12:31:18,170 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:31:18,170 - printer_client - INFO - 🔌 Connecting to USB printer: gobbler_80mm_Series
+2025-07-06 12:31:18,188 - printer_client - INFO - ✅ Connected to printer: gobbler_80mm_Series
+2025-07-06 12:31:18,189 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:31:18,189 - printer_client - INFO - 🧪 Running printer test...
+2025-07-06 12:31:18,200 - printer_client - INFO - ✅ Receipt printed successfully
+2025-07-06 12:31:18,200 - printer_client - INFO - ✅ Printer test successful
+2025-07-06 12:31:18,200 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:31:18,200 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:31:18,271 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:31:18,271 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:31:18,271 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:31:18,340 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:31:18,341 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:31:18,341 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:31:18,341 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:31:18,341 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:31:18,341 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:31:18,342 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:31:19,345 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:31:19,345 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:31:19,346 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:31:20,420 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:31:20,420 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:31:20,420 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:31:21,496 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:31:21,496 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:31:21,497 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:31:22,577 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:31:22,577 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:31:22,577 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:31:23,651 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:31:23,651 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:31:23,652 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:31:24,249 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:31:24,725 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:31:24,725 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:31:24,725 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:31:25,278 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:31:25,278 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:31:25,731 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:31:27,732 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:31:27,802 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:31:27,803 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:31:27,804 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:31:27,873 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:31:27,874 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:31:27,874 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:31:28,352 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:31:28,807 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:31:28,869 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:31:28,869 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:33:27,005 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:33:27,006 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: gobbler_80mm_Series
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:33:27,012 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.52
+2025-07-06 12:33:27,012 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:33:27,012 - printer_client - INFO - 🔌 Connecting to USB printer: gobbler_80mm_Series
+2025-07-06 12:33:27,031 - printer_client - INFO - ✅ Connected to printer: gobbler_80mm_Series
+2025-07-06 12:33:27,031 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:33:27,031 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:33:27,031 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:33:27,104 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:33:27,104 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:33:27,105 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:33:27,175 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:33:27,175 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:33:27,176 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:33:27,176 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:33:27,176 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:33:27,176 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:33:27,176 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:33:27,957 - printer_client - WARNING - ⚠️ MQTT disconnected, attempting recovery...
+2025-07-06 12:33:27,957 - printer_client - INFO - 🔄 Attempting MQTT reconnection...
+2025-07-06 12:33:28,109 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:33:30,112 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:33:30,182 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:33:30,182 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:33:30,182 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:33:30,251 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:33:30,251 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:33:30,251 - printer_client - INFO - ✅ MQTT reconnected
+2025-07-06 12:33:31,252 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:33:31,253 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:33:31,253 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:33:32,327 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:33:32,327 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:33:32,327 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:33:33,402 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:33:33,402 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:33:33,402 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:33:34,431 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:33:34,474 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:33:34,474 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:33:34,474 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:33:35,546 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:33:35,546 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:33:35,546 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:33:35,720 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:33:35,914 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:33:36,057 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:33:36,175 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:33:36,287 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:33:36,619 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:33:36,619 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:33:36,619 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:33:36,925 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:33:37,101 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:33:37,182 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:33:37,303 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:33:37,455 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:33:37,599 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:33:37,623 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:33:37,623 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:33:37,623 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:38:17,637 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:38:17,637 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: gobbler_80mm_Series
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98-1751785697
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:38:17,644 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.51
+2025-07-06 12:38:17,644 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:38:17,644 - printer_client - INFO - 🔌 Connecting to USB printer: gobbler_80mm_Series
+2025-07-06 12:38:17,665 - printer_client - INFO - ✅ Connected to printer: gobbler_80mm_Series
+2025-07-06 12:38:17,665 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:38:17,665 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:38:17,665 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:38:17,736 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:38:17,736 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:38:17,808 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:38:17,809 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:38:17,809 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:38:17,809 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:38:17,809 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:38:17,809 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:38:17,810 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:40:12,052 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:40:12,607 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:40:12,790 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:40:12,857 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:40:12,923 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:40:13,057 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:40:13,215 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:40:13,422 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:40:13,931 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:40:14,104 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:40:14,169 - printer_client - INFO - 🔌 MQTT disconnected gracefully
+2025-07-06 12:40:14,170 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:40:14,170 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:40:14,170 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:40:17,400 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:40:17,400 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: gobbler_80mm_Series
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98-1751785817
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:40:17,406 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.51
+2025-07-06 12:40:17,406 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:40:17,406 - printer_client - INFO - 🔌 Connecting to USB printer: gobbler_80mm_Series
+2025-07-06 12:40:17,425 - printer_client - INFO - ✅ Connected to printer: gobbler_80mm_Series
+2025-07-06 12:40:17,425 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:40:17,425 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:40:17,425 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:40:17,497 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:40:17,497 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:40:17,568 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:40:17,569 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:40:17,569 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:40:17,569 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:40:17,569 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:40:17,569 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:40:17,569 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:40:20,396 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:40:21,016 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:40:21,149 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:40:22,571 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:40:22,593 - printer_client - INFO - 🔌 MQTT disconnected gracefully
+2025-07-06 12:40:22,594 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:40:22,594 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:40:22,594 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:44:58,025 - printer_client - WARNING - ⚠️ MQTT unexpected disconnection: 7
+2025-07-06 12:44:59,158 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:44:59,159 - printer_client - INFO - 📡 Subscribed to print topic: vimal1/pt/EE363AC5CF98/p
+2025-07-06 12:45:08,017 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:45:08,018 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: gobbler_80mm_Series
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98-1751786107
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:45:08,023 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.5
+2025-07-06 12:45:08,023 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:45:08,023 - printer_client - INFO - 🔌 Connecting to USB printer: gobbler_80mm_Series
+2025-07-06 12:45:08,046 - printer_client - INFO - ✅ Connected to printer: gobbler_80mm_Series
+2025-07-06 12:45:08,046 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:45:08,046 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:45:08,046 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:45:08,117 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:45:08,117 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:45:08,189 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:45:08,189 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:45:08,190 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:45:08,190 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:45:08,190 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:45:08,190 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:45:08,190 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:47:32,435 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:47:32,435 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: gobbler_80mm_Series
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98-1751786252
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:47:32,441 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.5
+2025-07-06 12:47:32,441 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:47:32,441 - printer_client - INFO - 🔌 Connecting to USB printer: gobbler_80mm_Series
+2025-07-06 12:47:32,460 - printer_client - INFO - ✅ Connected to printer: gobbler_80mm_Series
+2025-07-06 12:47:32,460 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:47:32,460 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:47:32,460 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:47:32,533 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:47:32,533 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:47:32,600 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:47:32,600 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:47:32,600 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:47:32,601 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:47:32,601 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:47:32,601 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:47:32,601 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:47:40,601 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:47:42,609 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:47:43,636 - printer_client - INFO - 🔌 MQTT disconnected gracefully
+2025-07-06 12:47:43,636 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:47:43,637 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:47:43,637 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped
+2025-07-06 12:49:48,639 - printer_client - INFO - 🚀 Starting SD MQTT Printer Mac client...
+2025-07-06 12:49:48,640 - printer_client - INFO - 
+SD MQTT Printer Mac Configuration:
+==================================
+MQTT Broker: printer.scandeer.com:1883
+MQTT Username: vimal2
+Printer: gobbler_80mm_Series
+Printer ID: EE363AC5CF98
+MAC Address: EE:36:3A:C5:CF:98
+Client ID: PrinterClient-EE363AC5CF98-1751786388
+Heartbeat Interval: 30s
+Debug Mode: True
+
+Topics:
+- Print: vimal2/pt/EE363AC5CF98/p
+- Status: vimal2/pt/EE363AC5CF98/a
+- Heartbeat: vimal2/pt/EE363AC5CF98/h
+- Error: vimal2/pt/EE363AC5CF98/e
+- Recovery: vimal2/pt/EE363AC5CF98/r
+
+2025-07-06 12:49:48,646 - printer_client - INFO - 💻 System info | platform=Darwin | platform_version=Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020 | architecture=arm64 | python_version=3.13.5 | cpu_count=10 | memory_gb=16.0 | disk_free_gb=282.5
+2025-07-06 12:49:48,646 - printer_client - INFO - 🖨️ Connecting to USB printer...
+2025-07-06 12:49:48,646 - printer_client - INFO - 🔌 Connecting to USB printer: gobbler_80mm_Series
+2025-07-06 12:49:48,665 - printer_client - INFO - ✅ Connected to printer: gobbler_80mm_Series
+2025-07-06 12:49:48,665 - printer_client - INFO - ✅ Printer connected successfully
+2025-07-06 12:49:48,665 - printer_client - INFO - 📡 Connecting to MQTT broker...
+2025-07-06 12:49:48,665 - printer_client - INFO - 🔌 Connecting to MQTT broker: printer.scandeer.com:1883
+2025-07-06 12:49:48,736 - printer_client - INFO - ✅ MQTT connected with result code 0
+2025-07-06 12:49:48,736 - printer_client - INFO - 📡 Subscribed to print topic: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:49:48,808 - printer_client - INFO - 🔌 MQTT connected | broker=printer.scandeer.com | port=1883
+2025-07-06 12:49:48,808 - printer_client - INFO - 💓 Heartbeat started (interval: 30s)
+2025-07-06 12:49:48,809 - printer_client - INFO - ✅ MQTT connected successfully
+2025-07-06 12:49:48,809 - printer_client - INFO - 📊 Status monitoring started
+2025-07-06 12:49:48,809 - printer_client - INFO - ✅ SD MQTT Printer Mac client started successfully
+2025-07-06 12:49:48,809 - printer_client - INFO - 📡 Listening for print commands on: vimal2/pt/EE363AC5CF98/p
+2025-07-06 12:49:48,809 - printer_client - INFO - 💓 Sending heartbeats to: vimal2/pt/EE363AC5CF98/h
+2025-07-06 12:50:33,005 - printer_client - INFO - 📝 Received signal 2
+2025-07-06 12:50:33,845 - printer_client - INFO - 🛑 Stopping SD MQTT Printer Mac client...
+2025-07-06 12:50:33,960 - printer_client - INFO - 🔌 MQTT disconnected gracefully
+2025-07-06 12:50:33,960 - printer_client - WARNING - 🔌 MQTT disconnected | reason=
+2025-07-06 12:50:33,960 - printer_client - INFO - 🔌 Printer disconnected
+2025-07-06 12:50:33,960 - printer_client - INFO - ✅ SD MQTT Printer Mac client stopped

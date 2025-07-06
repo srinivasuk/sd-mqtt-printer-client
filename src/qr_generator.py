@@ -9,9 +9,9 @@ from PIL import Image
 from typing import Dict, Any, List, Optional, Tuple
 import io
 
-from config import config
-from utils.logger import logger
-from utils.bitmap import encode_pixel_array_to_bitmap, analyze_bitmap_density
+from .config import config
+from .utils.logger import logger
+from .utils.bitmap import encode_pixel_array_to_bitmap, analyze_bitmap_density
 
 
 class QRGenerator:

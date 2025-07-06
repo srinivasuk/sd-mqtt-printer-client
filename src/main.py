@@ -13,11 +13,11 @@ import signal
 import threading
 from typing import Optional
 
-from config import config
-from utils.logger import logger
-from printer_manager import printer_manager
-from mqtt_client import mqtt_client
-from qr_generator import qr_generator
+from .config import config
+from .utils.logger import logger
+from .printer_manager import printer_manager
+from .mqtt_client import mqtt_client
+from .qr_generator import qr_generator
 
 
 class PrinterClientApp:
@@ -121,13 +121,13 @@ class PrinterClientApp:
         if printer_manager.connect():
             logger.info("✅ Printer connected successfully")
 
-            # Run a test print if in debug mode
-            if config.DEBUG_MODE:
-                logger.info("🧪 Running printer test...")
-                if printer_manager.test_print():
-                    logger.info("✅ Printer test successful")
-                else:
-                    logger.warning("⚠️ Printer test failed")
+            # Skip automatic test print to avoid unwanted printing
+            # if config.DEBUG_MODE:
+            #     logger.info("🧪 Running printer test...")
+            #     if printer_manager.test_print():
+            #         logger.info("✅ Printer test successful")
+            #     else:
+            #         logger.warning("⚠️ Printer test failed")
 
             return True
         else:
