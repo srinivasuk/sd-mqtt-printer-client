@@ -1071,49 +1071,76 @@ class NamedPrinterWrapper:
         pass  # Formatting is already applied when state changes
 
     def qr(self, text: str, size: int = 6, center: bool = True):
-        """Print QR code using ESC/POS QR commands or fallback to text."""
+        """Print QR code using character-based approach exactly like ESP32 firmware."""
         try:
             # Center QR code if requested
             if center:
                 old_align = self.current_align
                 self.justify('C')
             
-            # Try ESC/POS QR code command
-            # GS ( k - QR Code commands
-            text_bytes = text.encode('utf-8')
-            text_len = len(text_bytes)
+            # Generate QR code using character approach like ESP32
+            success = self._generate_qr_characters(text, size)
             
-            # QR Code model
-            self._raw(bytes([self.GS, ord('('), ord('k'), 4, 0, 49, 65, 50, 0]))
-            
-            # QR Code size
-            qr_size = max(1, min(16, size))
-            self._raw(bytes([self.GS, ord('('), ord('k'), 3, 0, 49, 67, qr_size]))
-            
-            # QR Code error correction level
-            self._raw(bytes([self.GS, ord('('), ord('k'), 3, 0, 49, 69, 48]))
-            
-            # QR Code data
-            self._raw(bytes([self.GS, ord('('), ord('k'), text_len + 3, 0, 49, 80, 48]))
-            self._raw(text_bytes)
-            
-            # Print QR Code
-            self._raw(bytes([self.GS, ord('('), ord('k'), 3, 0, 49, 81, 48]))
-            
-            # Add some spacing
-            self._raw(bytes([self.LF, self.LF]))
+            if not success:
+                logger.warning("QR character generation failed, using text fallback")
+                if center:
+                    self.text(f"\n    QR: {text}\n\n")
+                else:
+                    self.text(f"QR: {text}\n")
             
             # Restore alignment
             if center and old_align != 'C':
                 self.justify(old_align)
                 
         except Exception as e:
-            logger.debug(f"QR command failed, using text fallback: {str(e)}")
+            logger.debug(f"QR generation failed: {str(e)}")
             # Fallback to text representation
             if center:
                 self.text(f"\n    QR: {text}\n\n")
             else:
                 self.text(f"QR: {text}\n")
+
+    def _generate_qr_characters(self, text: str, size: int) -> bool:
+        """Generate QR code using simple ASCII characters that work with all printers."""
+        try:
+            import qrcode
+            
+            # Create QR code with simple settings
+            qr = qrcode.QRCode(
+                version=1,
+                error_correction=qrcode.constants.ERROR_CORRECT_L,
+                box_size=1,
+                border=1,
+            )
+            qr.add_data(text)
+            qr.make(fit=True)
+            
+            # Get QR code matrix
+            matrix = qr.get_matrix()
+            
+            # Print QR code using simple ASCII characters that work on all printers
+            for row in matrix:
+                line = ""
+                for module in row:
+                    if module:
+                        line += "##"  # Double hash for black pixels - more visible
+                    else:
+                        line += "  "  # Double space for white pixels
+                
+                # Print the line directly without special formatting
+                self.text(line + "\n")
+            
+            # Add spacing
+            self.text("\n")
+            
+            return True
+            
+        except ImportError:
+            logger.error("qrcode library not available")
+            return False
+        except Exception as e:
+            logger.error(f"QR character generation error: {e}")
+            return False
 
     def print_bitmap(self, width: int, height: int, bitmap_data: bytes):
         """Print bitmap using ESC/POS commands."""
