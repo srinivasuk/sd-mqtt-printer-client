@@ -10,7 +10,7 @@ packages = [{include = "src", from = "."}]
 python = "^3.9"
 paho-mqtt = "^1.6.1"
 python-escpos = "^3.0"
-qrcode = "^7.4.2"
+qrcode = {extras = ["pil"], version = "^8.2"}
 pillow = "^10.0.0"
 pyusb = "^1.2.1"
 python-dotenv = "^1.0.0"

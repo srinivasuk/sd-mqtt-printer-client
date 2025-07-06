@@ -206,11 +206,19 @@ class USBPrinterManager:
                     # Apply formatting if present (like ESP32 applyShortFormat)
                     if "f" in element:
                         self._apply_short_format(element)
+                        continue  # Skip to next element after applying format
                     
                     # Extract order ID from metadata
                     if "m" in element and "order_id" in element["m"]:
                         last_order_id = element["m"]["order_id"]
                         logger.debug(f"📋 Order ID extracted: {last_order_id}")
+                        continue  # Skip to next element after extracting metadata
+                    
+                    # Handle line elements (MISSING LOGIC - this is why lines weren't printing!)
+                    if "line" in element:
+                        logger.debug(f"📏 Line element detected: {element}")
+                        self._print_line(element)
+                        continue  # Skip to next element after printing line
                     
                     # Handle QR codes (like ESP32 firmware QR processing)
                     if not qr_already_printed:
@@ -219,33 +227,64 @@ class USBPrinterManager:
                             qr_url = f"https://scandeer.com/order/{last_order_id}"
                             qr_size = element.get("qr_size", 10)
                             qr_align = element.get("qr_alignment", "center")
-                            self._print_qr_code(qr_url, qr_size, qr_align)
+                            qr_data = {
+                                "url": qr_url,
+                                "size": qr_size,
+                                "alignment": qr_align,
+                                "type": "url"
+                            }
+                            self._print_qr_code(qr_data)
                             qr_already_printed = True
+                            continue
                         elif "qr_image_url" in element:
                             logger.debug("🖼️ QR image URL detected")
                             qr_url = element["qr_image_url"]
                             qr_size = element.get("qr_size", 10)
                             qr_align = element.get("qr_alignment", "center")
-                            self._print_qr_code(qr_url, qr_size, qr_align)
+                            qr_data = {
+                                "url": qr_url,
+                                "size": qr_size,
+                                "alignment": qr_align,
+                                "type": "url"
+                            }
+                            self._print_qr_code(qr_data)
                             qr_already_printed = True
+                            continue
                         elif "qr_url" in element:
                             logger.debug("🌐 QR URL detected")
-                            qr_url = element["qr_url"]
-                            qr_size = element.get("qr_size", 10)
-                            qr_align = element.get("qr_alignment", "center")
-                            self._print_qr_code(qr_url, qr_size, qr_align)
+                            qr_data = {
+                                "url": element["qr_url"],
+                                "size": element.get("qr_size", 10),
+                                "alignment": element.get("qr_alignment", "center"),
+                                "type": "url"
+                            }
+                            self._print_qr_code(qr_data)
                             qr_already_printed = True
+                            continue
                         elif "qr" in element:
                             logger.debug("🔲 Legacy QR detected")
                             if isinstance(element["qr"], str):
-                                self._print_qr_code(element["qr"], 10, "center")
+                                qr_data = {
+                                    "text": element["qr"],
+                                    "url": element["qr"],
+                                    "size": 10,
+                                    "alignment": "center",
+                                    "type": "url"
+                                }
+                                self._print_qr_code(qr_data)
                             elif isinstance(element["qr"], dict):
                                 qr_obj = element["qr"]
-                                if "text" in qr_obj:
-                                    self._print_qr_code(qr_obj["text"], 10, "center")
-                                elif "url" in qr_obj:
-                                    self._print_qr_code(qr_obj["url"], 10, "center")
+                                # Set defaults for missing fields
+                                qr_data = {
+                                    "text": qr_obj.get("text", qr_obj.get("url", "")),
+                                    "url": qr_obj.get("url", qr_obj.get("text", "")),
+                                    "size": qr_obj.get("size", 10),
+                                    "alignment": qr_obj.get("alignment", "center"),
+                                    "type": qr_obj.get("type", "url")
+                                }
+                                self._print_qr_code(qr_data)
                             qr_already_printed = True
+                            continue
                 
                 # Handle text strings (like ESP32 firmware text processing)
                 elif isinstance(element, str):
@@ -259,6 +298,9 @@ class USBPrinterManager:
                     self._print_text_line(element)
                     logger.debug(f"📝 Text printed with format - Align: {self.formatter.current_align}, Bold: {self.formatter.current_bold}, Size: {self.formatter.current_size}")
 
+            # Finalize receipt (cut paper, add spacing) - THIS WAS MISSING!
+            self._finalize_receipt()
+            
             # Flush any remaining print data
             self._flush_print_job()
             
@@ -382,69 +424,335 @@ class USBPrinterManager:
             
         logger.debug(f"🎨 Format applied", changes=changes)
 
-    def _print_line(self, line_element: Dict[str, Any]):
-        """Print a line element."""
-        line_config = parse_line_command(line_element)
-
-        # Generate line pattern
-        line_pattern = generate_line_pattern(
-            line_config["type"],
-            line_config["width"],
-            line_config["thickness"]
-        )
-
-        # Print line with center alignment
-        self.printer.set_with_default(align='center')
-        self.printer.text(line_pattern + "\n")
-
-        logger.debug(f"📏 Line printed", type=line_config["type"], width=line_config["width"])
-
-    def _print_qr_code(self, qr_data: str, size: int = 10, alignment: str = "center"):
-        """
-        Print QR code with specified parameters (like ESP32 firmware QR handling).
-        
-        Args:
-            qr_data: QR code data/URL
-            size: QR code size
-            alignment: QR code alignment
-        """
+    def _print_line(self, line_element):
+        """Print line elements using proper ESC/POS bitmap commands like ESP32 firmware."""
         try:
-            logger.debug(f"🔲 Printing QR code: {qr_data[:50]}...")
+            line_type = line_element.get("line", "solid")
+            logger.debug(f"📏 Drawing line type: {line_type}")
             
-            # Save current formatting state
-            saved_align = self.formatter.current_align
-            saved_bold = self.formatter.current_bold
-            saved_size = self.formatter.current_size
-            
-            # Set QR alignment
-            if alignment == "left":
-                self.formatter.current_align = 'L'
-            elif alignment == "right":
-                self.formatter.current_align = 'R'
+            if line_type == "solid":
+                self._print_solid_line_bitmap()
+            elif line_type == "dotted":
+                self._print_dotted_line_bitmap()
+            elif line_type == "dashed":
+                self._print_dashed_line_bitmap()
             else:
-                self.formatter.current_align = 'C'
+                logger.warning(f"Unknown line type: {line_type}, using solid")
+                self._print_solid_line_bitmap()
+                
+        except Exception as e:
+            logger.error(f"Error printing line: {e}")
+            # Fallback to simple text line
+            self.printer.text("--------------------------------\n")
+
+    def _print_solid_line_bitmap(self):
+        """Print solid line using ESC/POS bitmap command like ESP32 firmware."""
+        try:
+            logger.debug("📏 Drawing solid line using ESC/POS bitmap")
             
-            self._apply_current_format()
+            # Use full 80mm printer width (72 bytes = 576 pixels)
+            bytes_per_row = 72
+            thickness = 2  # 2 pixel thick line
             
-            # Print QR code using the printer's QR capability
-            if hasattr(self.printer, 'qr'):
-                self.printer.qr(qr_data, size=size, center=(alignment == "center"))
-            else:
-                # Fallback: print QR as text
-                self.printer.text(f"\nQR Code: {qr_data}\n")
+            # Create bitmap data for solid line (all pixels black)
+            total_bytes = bytes_per_row * thickness
+            line_data = bytearray([0xFF] * total_bytes)  # 0xFF = all pixels black
             
-            # Restore formatting state (like ESP32 firmware)
-            self.formatter.current_align = saved_align
-            self.formatter.current_bold = saved_bold
-            self.formatter.current_size = saved_size
-            self._apply_current_format()
+            # Add spacing above
+            self.printer.text("\n")
             
-            logger.debug("✅ QR code printed successfully")
+            # Send ESC/POS raster bitmap command: GS v 0
+            cmd = bytes([0x1D, ord('v'), ord('0'), 0, bytes_per_row, 0, thickness, 0])
+            self.printer._raw(cmd)
+            
+            # Send bitmap data
+            self.printer._raw(line_data)
+            
+            # Add spacing below
+            self.printer.text("\n")
+            
+            logger.debug("✅ Solid line printed using ESC/POS bitmap")
             
         except Exception as e:
-            logger.error(f"❌ QR code print error: {str(e)}")
-            # Fallback: print QR URL as text
-            self.printer.text("QR Code: " + qr_data + "\n")
+            logger.error(f"Error printing solid line bitmap: {e}")
+            # Fallback to text line
+            self.printer.text("=" * 48 + "\n")
+
+    def _print_dotted_line_bitmap(self):
+        """Print dotted line using ESC/POS bitmap command like ESP32 firmware."""
+        try:
+            logger.debug("📏 Drawing dotted line using ESC/POS bitmap")
+            
+            # Use full 80mm printer width
+            bytes_per_row = 72
+            dot_size = 2      # 2 pixel dots
+            spacing = 2       # 2 pixel spacing between dots
+            
+            total_bytes = bytes_per_row * dot_size
+            line_data = bytearray([0x00] * total_bytes)  # Start with all white
+            
+            # Create dotted pattern
+            pattern_length = dot_size + spacing
+            for row in range(dot_size):
+                for col in range(bytes_per_row):
+                    byte_index = row * bytes_per_row + col
+                    
+                    # Create pattern: dot_size pixels on, spacing pixels off
+                    for bit in range(8):
+                        pixel_pos = (col * 8 + bit) % pattern_length
+                        if pixel_pos < dot_size:
+                            line_data[byte_index] |= (0x80 >> bit)  # Set bit (black pixel)
+            
+            # Add spacing above
+            self.printer.text("\n")
+            
+            # Send ESC/POS raster bitmap command: GS v 0
+            cmd = bytes([0x1D, ord('v'), ord('0'), 0, bytes_per_row, 0, dot_size, 0])
+            self.printer._raw(cmd)
+            
+            # Send bitmap data
+            self.printer._raw(line_data)
+            
+            # Add spacing below
+            self.printer.text("\n")
+            
+            logger.debug("✅ Dotted line printed using ESC/POS bitmap")
+            
+        except Exception as e:
+            logger.error(f"Error printing dotted line bitmap: {e}")
+            # Fallback to text line
+            self.printer.text("." * 24 + " " * 24 + "\n")
+
+    def _print_dashed_line_bitmap(self):
+        """Print dashed line using simple text characters as fallback."""
+        try:
+            logger.debug("📏 Drawing dashed line using text characters")
+            self.printer.text("- " * 24 + "\n")
+            logger.debug("✅ Dashed line printed")
+        except Exception as e:
+            logger.error(f"Error printing dashed line: {e}")
+            self.printer.text("--------------------------------\n")
+
+    def _print_qr_code(self, qr_element):
+        """Print QR code using the method that works in ESP32 firmware."""
+        try:
+            logger.debug(f"🔲 Processing QR element: {qr_element}")
+            
+            # Handle different QR formats from server
+            if "url" in qr_element:
+                # This is the format created by the main processing loop
+                qr_url = qr_element["url"]
+                qr_size = qr_element.get("size", 10)
+                qr_alignment = qr_element.get("alignment", "center")
+                
+                logger.debug(f"🌐 QR URL detected: {qr_url}")
+                logger.debug(f"🔲 QR size: {qr_size}, alignment: {qr_alignment}")
+                
+                # Use the built-in ESC/POS QR method like ESP32 firmware
+                success = self._print_qr_code_builtin(qr_url, qr_size, qr_alignment)
+                
+                if not success:
+                    logger.warning("QR code printing failed - printing fallback text")
+                    self.printer.text("QR Code Unavailable\n")
+                    self.printer.text("Contact theater for details\n")
+                else:
+                    logger.debug("✅ QR code printed successfully")
+                    
+            elif "qr_url" in qr_element:
+                # Direct QR URL format
+                qr_url = qr_element["qr_url"]
+                qr_size = qr_element.get("qr_size", 10)
+                qr_alignment = qr_element.get("qr_alignment", "center")
+                
+                logger.debug(f"🌐 Direct QR URL detected: {qr_url}")
+                success = self._print_qr_code_builtin(qr_url, qr_size, qr_alignment)
+                
+                if not success:
+                    self.printer.text("QR Code Unavailable\n")
+                    
+            elif "qr" in qr_element:
+                # Legacy QR format
+                qr_data = qr_element["qr"]
+                logger.debug(f"🔲 Legacy QR format: {qr_data}")
+                success = self._print_qr_code_builtin(qr_data, 10, "center")
+                
+                if not success:
+                    self.printer.text("QR Code Unavailable\n")
+                    
+            elif "text" in qr_element:
+                # Text-based QR format
+                qr_text = qr_element["text"]
+                qr_size = qr_element.get("size", 10)
+                qr_alignment = qr_element.get("alignment", "center")
+                
+                logger.debug(f"🔲 Text QR format: {qr_text}")
+                success = self._print_qr_code_builtin(qr_text, qr_size, qr_alignment)
+                
+                if not success:
+                    self.printer.text("QR Code Unavailable\n")
+                    
+            else:
+                logger.warning(f"Unknown QR element format: {qr_element}")
+                self.printer.text("QR Code Format Error\n")
+                
+        except Exception as e:
+            logger.error(f"Error printing QR code: {e}")
+            self.printer.text("QR Code Error\n")
+
+    def _print_qr_code_builtin(self, data, size=10, alignment="center"):
+        """
+        Print QR code using built-in ESC/POS QR commands like ESP32 firmware.
+        This is the method that actually works in the ESP32 firmware.
+        """
+        try:
+            logger.debug(f"🔲 Printing QR using built-in ESC/POS method")
+            logger.debug(f"🔲 Data: {data}")
+            logger.debug(f"🔲 Size: {size}, Alignment: {alignment}")
+            
+            # Map alignment to ESC/POS codes
+            align_code = 1  # Center by default
+            if alignment == "left":
+                align_code = 0
+            elif alignment == "right":
+                align_code = 2
+            elif alignment == "center":
+                align_code = 1
+            
+            # Set alignment
+            self.printer._raw(bytes([0x1B, ord('a'), align_code]))
+            
+            # Map UI size to thermal printer QR size (like ESP32 firmware)
+            thermal_size = size
+            if size <= 4:
+                thermal_size = 3   # Small
+            elif size <= 8:
+                thermal_size = 6   # Medium  
+            elif size <= 12:
+                thermal_size = 10  # Large
+            else:
+                thermal_size = 12  # Extra Large
+                
+            # Validate size range (1-16 for most thermal printers)
+            if thermal_size < 1:
+                thermal_size = 1
+            if thermal_size > 16:
+                thermal_size = 16
+                
+            logger.debug(f"🔲 Mapped size {size} to thermal size {thermal_size}")
+            
+            # Validate data length
+            data_bytes = data.encode('utf-8')
+            if len(data_bytes) > 200:
+                logger.warning("QR data too long, truncating to 200 bytes")
+                data_bytes = data_bytes[:200]
+            
+            # ESC/POS QR Code commands (like ESP32 firmware)
+            cn = 49  # QR Code function group
+            
+            # Set QR code size (Function 167)
+            size_cmd = bytes([0x1D, ord('('), ord('k'), 0x03, 0x00, cn, 167, thermal_size])
+            self.printer._raw(size_cmd)
+            
+            # Set error correction level (Function 169) - Level H (30%)
+            error_cmd = bytes([0x1D, ord('('), ord('k'), 0x03, 0x00, cn, 169, 0x33])
+            self.printer._raw(error_cmd)
+            
+            # Store QR data (Function 180)
+            data_len = len(data_bytes)
+            store_cmd = bytes([0x1D, ord('('), ord('k'), 
+                             (data_len + 3) & 0xFF, ((data_len + 3) >> 8) & 0xFF,
+                             cn, 180, 0x30]) + data_bytes
+            self.printer._raw(store_cmd)
+            
+            # Print QR code (Function 181)
+            print_cmd = bytes([0x1D, ord('('), ord('k'), 0x03, 0x00, cn, 181, 0x30])
+            self.printer._raw(print_cmd)
+            
+            # Add some spacing after QR code
+            self.printer.text("\n\n")
+            
+            # Reset alignment to left
+            self.printer._raw(bytes([0x1B, ord('a'), 0]))
+            
+            logger.debug("✅ Built-in ESC/POS QR code printed")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error printing built-in QR code: {e}")
+            return False
+
+    def _print_qr_url_real(self, qr_data: Dict[str, Any]) -> bool:
+        """Generate and print actual QR code from URL like ESP32 firmware should do."""
+        try:
+            import qrcode
+            from PIL import Image
+            import io
+            
+            # Get URL from QR data
+            url = qr_data.get("url", qr_data.get("text", ""))
+            if not url:
+                logger.error("❌ No URL provided for QR code")
+                return False
+                
+            logger.debug(f"🔲 Generating QR code for URL: {url}")
+            
+            # Create QR code
+            qr = qrcode.QRCode(
+                version=1,
+                error_correction=qrcode.constants.ERROR_CORRECT_L,
+                box_size=3,  # Smaller box size for thermal printer
+                border=2,
+            )
+            qr.add_data(url)
+            qr.make(fit=True)
+            
+            # Create image
+            img = qr.make_image(fill_color="black", back_color="white")
+            
+            # Convert to bitmap for thermal printer
+            # Resize to appropriate size for thermal printer
+            width, height = img.size
+            if width > 200:  # Limit size for thermal printer
+                ratio = 200 / width
+                new_width = int(width * ratio)
+                new_height = int(height * ratio)
+                img = img.resize((new_width, new_height), Image.NEAREST)
+            
+            # Convert to 1-bit bitmap
+            img = img.convert('1')
+            
+            # Convert to bytes for ESC/POS
+            width, height = img.size
+            bytes_per_row = (width + 7) // 8
+            bitmap_data = []
+            
+            # Convert PIL image to bitmap bytes (proper ESC/POS format)
+            for y in range(height):
+                for byte_idx in range(bytes_per_row):
+                    byte_val = 0
+                    for bit in range(8):
+                        x = byte_idx * 8 + bit
+                        if x < width:
+                            pixel = img.getpixel((x, y))
+                            if pixel == 0:  # Black pixel (0 in 1-bit image)
+                                byte_val |= (0x80 >> bit)
+                    bitmap_data.append(byte_val)
+            
+            # Print bitmap using ESC/POS commands
+            logger.debug(f"🔲 Printing QR bitmap: {width}x{height}, {len(bitmap_data)} bytes")
+            self.printer.print_bitmap(width, height, bytes(bitmap_data))
+            
+            logger.debug(f"🔲 Real QR code printed successfully: {width}x{height}")
+            return True
+            
+        except ImportError:
+            logger.warning("⚠️ qrcode library not installed, falling back to text")
+            self.printer.text(f"QR: {url}\n")
+            return False
+        except Exception as e:
+            logger.error(f"❌ QR generation error: {str(e)}")
+            self.printer.text(f"QR: {url}\n")
+            return False
 
     def _print_qr_bitmap(self, qr_data: Dict[str, Any]):
         """Print QR code from bitmap data."""
@@ -462,6 +770,26 @@ class USBPrinterManager:
         except Exception as e:
             logger.error(f"❌ Bitmap QR print error: {str(e)}")
             raise
+
+    def _print_qr_url_escpos(self, qr_data: Dict[str, Any]):
+        """Print QR code using reliable ESC/POS QR command."""
+        try:
+            url = qr_data.get("url", qr_data.get("text", ""))
+            size = qr_data.get("size", 6)
+
+            # Map size to ESC/POS QR size (1-16)
+            escpos_size = max(3, min(10, size))  # Use safe size range
+
+            logger.debug(f"🔲 Printing QR with ESC/POS command: size={escpos_size}")
+            
+            # Use the NamedPrinterWrapper QR function directly
+            self.printer.qr(url, size=escpos_size, center=True)
+
+        except Exception as e:
+            logger.error(f"❌ ESC/POS QR print error: {str(e)}")
+            # Reliable fallback to text
+            self.printer.text(f"\nQR Code: {url}\n")
+            self.printer.text("(Scan with phone camera)\n\n")
 
     def _print_qr_url(self, qr_data: Dict[str, Any]):
         """Print QR code from URL using ESC/POS QR command."""
@@ -487,9 +815,14 @@ class USBPrinterManager:
 
         # Cut paper if supported
         try:
-            self.printer.cut()
-        except Exception:
-            # If cut fails, just add more space
+            if hasattr(self.printer, 'cut'):
+                self.printer.cut()
+                logger.debug("✂️ Paper cut command sent")
+            else:
+                logger.debug("⚠️ Cut not supported, adding extra space")
+                self.printer.text("\n\n\n")
+        except Exception as e:
+            logger.warning(f"⚠️ Cut failed: {str(e)}, adding extra space")
             self.printer.text("\n\n\n")
 
     def _flush_print_job(self):
@@ -782,17 +1115,112 @@ class NamedPrinterWrapper:
             else:
                 self.text(f"QR: {text}\n")
 
+    def print_bitmap(self, width: int, height: int, bitmap_data: bytes):
+        """Print bitmap using ESC/POS commands."""
+        # Ensure printer is initialized
+        if not self._initialized:
+            self.init()
+        
+        # Add DC2 constant if not defined
+        DC2 = 0x12
+        
+        # Calculate bytes per row
+        bytes_per_row = (width + 7) // 8
+        
+        # Print bitmap in chunks to avoid buffer overflow
+        chunk_height = min(height, 255)
+        
+        for y_start in range(0, height, chunk_height):
+            current_chunk_height = min(chunk_height, height - y_start)
+            
+            # ESC/POS bitmap command: DC2 * height width
+            self._raw(bytes([DC2, 0x2A, current_chunk_height, bytes_per_row]))
+            
+            # Send bitmap data for this chunk
+            for y in range(current_chunk_height):
+                row_start = (y_start + y) * bytes_per_row
+                row_end = row_start + bytes_per_row
+                if row_end <= len(bitmap_data):
+                    self._raw(bitmap_data[row_start:row_end])
+                else:
+                    # Pad with zeros if data is insufficient
+                    remaining_data = bitmap_data[row_start:len(bitmap_data)]
+                    padding = bytes(bytes_per_row - len(remaining_data))
+                    self._raw(remaining_data + padding)
+    
+    def print_solid_line(self, thickness: int = 2, width: int = 48):
+        """Print solid line using bitmap graphics like ESP32 firmware."""
+        DC2 = 0x12
+        
+        # Use full width for 80mm thermal printer
+        bytes_per_row = 48  # 384 pixels = 48 bytes
+        
+        # Create solid line bitmap
+        line_data = bytes([0xFF] * (bytes_per_row * thickness))
+        
+        # Print using bitmap command
+        self._raw(bytes([DC2, 0x2A, thickness, bytes_per_row]))
+        self._raw(line_data)
+        
+        # Add line feed
+        self._raw(bytes([self.LF]))
+    
+    def print_dotted_line(self, dot_size: int = 2, spacing: int = 2, width: int = 48):
+        """Print dotted line using bitmap graphics like ESP32 firmware."""
+        DC2 = 0x12
+        bytes_per_row = 48  # 384 pixels = 48 bytes
+        
+        # Create dotted pattern
+        pattern_length = dot_size + spacing
+        line_data = bytearray(bytes_per_row * dot_size)
+        
+        for row in range(dot_size):
+            for col in range(bytes_per_row):
+                byte_val = 0
+                for bit in range(8):
+                    pixel_pos = (col * 8 + bit) % pattern_length
+                    if pixel_pos < dot_size:
+                        byte_val |= (0x80 >> bit)
+                line_data[row * bytes_per_row + col] = byte_val
+        
+        # Print using bitmap command
+        self._raw(bytes([DC2, 0x2A, dot_size, bytes_per_row]))
+        self._raw(bytes(line_data))
+        
+        # Add line feed
+        self._raw(bytes([self.LF]))
+    
+    def feed(self, lines: int = 1):
+        """Feed paper by specified number of lines."""
+        for _ in range(lines):
+            self._raw(bytes([self.LF]))
+
     def cut(self):
-        """Cut paper using ESC/POS command."""
+        """Cut paper using multiple ESC/POS cut commands for better compatibility."""
         # Add some space before cutting
-        self._raw(bytes([self.LF, self.LF]))
+        self._raw(bytes([self.LF, self.LF, self.LF]))
         
-        # GS V - Cut paper
-        # GS V 0 - Full cut
-        self._raw(bytes([self.GS, ord('V'), 0x00]))
+        # Try multiple cut commands for better compatibility
+        try:
+            # Method 1: GS V 0 - Full cut
+            self._raw(bytes([self.GS, ord('V'), 0x00]))
+        except:
+            pass
         
-        # Alternative: GS V 1 - Partial cut
-        # self._raw(bytes([self.GS, ord('V'), 0x01]))
+        try:
+            # Method 2: GS V 1 - Partial cut (more compatible)
+            self._raw(bytes([self.GS, ord('V'), 0x01]))
+        except:
+            pass
+        
+        try:
+            # Method 3: ESC d n - Feed and cut
+            self._raw(bytes([self.ESC, ord('d'), 3]))
+        except:
+            pass
+        
+        # Add more space to ensure cut happens
+        self._raw(bytes([self.LF, self.LF, self.LF]))
 
     def _raw(self, data: bytes):
         """Send raw data to printer buffer."""
