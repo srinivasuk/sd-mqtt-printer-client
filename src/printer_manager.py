@@ -231,6 +231,9 @@ class USBPrinterManager:
             # Final formatting and cut
             self._finalize_receipt()
 
+            # Flush/send the print job to the printer
+            self._flush_print_job()
+
             # Update statistics
             self.print_stats["total_jobs"] += 1
             self.print_stats["successful_jobs"] += 1
@@ -376,6 +379,23 @@ class USBPrinterManager:
             # If cut fails, just add more space
             self.printer.text("\n\n\n")
 
+    def _flush_print_job(self):
+        """Flush the print job to the printer."""
+        try:
+            if isinstance(self.printer, NamedPrinterWrapper):
+                # For named printers, call close to send buffered data
+                self.printer.close()
+                logger.debug("📤 Print job flushed to named printer")
+            elif hasattr(self.printer, 'close'):
+                # For USB printers, close might also flush
+                # But we don't want to close the connection, just flush
+                pass  # USB printers typically auto-flush
+            else:
+                logger.debug("📤 Print job sent to USB printer")
+        except Exception as e:
+            logger.error(f"❌ Print flush error: {str(e)}")
+            raise
+
     def get_status(self) -> Dict[str, Any]:
         """
         Get printer status compatible with ESP32 firmware format.
@@ -509,9 +529,11 @@ class NamedPrinterWrapper:
                 process = subprocess.Popen(['lp', '-d', self.printer_name],
                                          stdin=subprocess.PIPE)
                 process.communicate(input=self._buffer)
+                logger.info(f"✅ Print job sent to printer: {self.printer_name}")
                 self._buffer = b""
             except Exception as e:
                 logger.error(f"❌ lp print error: {str(e)}")
+                raise
 
 
 # Global printer manager instance

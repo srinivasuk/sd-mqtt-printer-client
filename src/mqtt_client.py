@@ -172,12 +172,19 @@ class MQTTClient:
 
             # Handle message based on topic
             if topic in self.message_handlers:
-                self.message_handlers[topic](payload)
+                try:
+                    self.message_handlers[topic](payload)
+                except Exception as handler_error:
+                    import traceback
+                    logger.error(f"❌ Message handler error: {str(handler_error)}")
+                    logger.error(f"❌ Handler stack trace: {traceback.format_exc()}")
             else:
                 logger.warning(f"⚠️ Unknown topic: {topic}")
 
         except Exception as e:
+            import traceback
             logger.error(f"❌ Message handling error: {str(e)}")
+            logger.error(f"❌ Message handling stack trace: {traceback.format_exc()}")
 
     def _on_publish(self, client, userdata, mid):
         """Handle MQTT publish callback."""
@@ -196,20 +203,57 @@ class MQTTClient:
 
             # Parse JSON payload
             print_data = json.loads(payload)
+            
+            # Debug: Log the data structure
+            logger.debug(f"🔍 Print data type: {type(print_data)}")
+            logger.debug(f"🔍 Print data content: {print_data}")
 
             # Update statistics
             self.stats["print_jobs_received"] += 1
 
-            # Extract print information
-            order_id = print_data.get("order_id", "unknown")
-            page = print_data.get("page", 1)
-            total_pages = print_data.get("total_pages", 1)
-            receipt_data = print_data.get("receipt_data", [])
+            # Check if data is a list (server format) or dict (expected format)
+            if isinstance(print_data, list):
+                logger.info(f"📄 Received print data as array (server format)")
+                # Extract metadata from the array like other printer clients
+                page_obj = print_data[0] if len(print_data) > 0 and isinstance(print_data[0], dict) else {}
+                meta_obj = print_data[1] if len(print_data) > 1 and isinstance(print_data[1], dict) and "m" in print_data[1] else {}
+                
+                # Extract order_id from metadata object
+                order_id = meta_obj.get("m", {}).get("order_id", "unknown") if "m" in meta_obj else "unknown"
+                
+                # Extract page info from page object
+                page = page_obj.get("page", 1)
+                total_pages = page_obj.get("of", 1)
+                
+                # The entire array is the receipt data
+                receipt_data = print_data
+                
+                logger.info(f"📋 Extracted metadata: order_id={order_id}, page={page}, total_pages={total_pages}")
+            elif isinstance(print_data, dict):
+                logger.info(f"📄 Received print data as dictionary (expected format)")
+                # Extract print information
+                order_id = print_data.get("order_id", "unknown")
+                page = print_data.get("page", 1)
+                total_pages = print_data.get("total_pages", 1)
+                receipt_data = print_data.get("receipt_data", [])
+            else:
+                logger.error(f"❌ Unexpected data type: {type(print_data)}")
+                return
 
             logger.print_start(order_id, page, total_pages)
 
             # Process receipt data with variable replacement
-            processed_receipt = self._process_receipt_data(receipt_data, print_data)
+            # For array format, create a minimal dict for variable replacement
+            if isinstance(print_data, list):
+                replacement_data = {
+                    "order_id": order_id,
+                    "page": page,
+                    "total_pages": total_pages
+                }
+            else:
+                replacement_data = print_data
+            
+            processed_receipt = self._process_receipt_data(receipt_data, replacement_data)
 
             # Send to printer
             if printer_manager.print_receipt(processed_receipt):
@@ -225,7 +269,9 @@ class MQTTClient:
         except json.JSONDecodeError as e:
             logger.error(f"❌ Invalid JSON in print message: {str(e)}")
         except Exception as e:
+            import traceback
             logger.error(f"❌ Print message handling error: {str(e)}")
+            logger.error(f"❌ Stack trace: {traceback.format_exc()}")
 
     def _process_receipt_data(self, receipt_data: list, print_data: dict) -> list:
         """
