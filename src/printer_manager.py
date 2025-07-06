@@ -170,20 +170,11 @@ class USBPrinterManager:
         time.sleep(2)
         return self.connect()
 
-    def print_receipt(self, receipt_data: List[Any]) -> bool:
+    def print_receipt(self, receipt_data: list) -> bool:
         """
-        Print receipt data compatible with ESP32 firmware format.
-
-        Args:
-            receipt_data: List of receipt elements (same format as ESP32)
-
-        Returns:
-            True if printed successfully, False otherwise
+        Print receipt data with formatting support.
+        Processes JSON elements exactly like ESP32 firmware.
         """
-        if not self.is_connected:
-            logger.error("❌ Printer not connected")
-            return False
-
         try:
             logger.debug(f"🖨️ Starting receipt print", elements=len(receipt_data))
 
@@ -194,60 +185,166 @@ class USBPrinterManager:
             self._apply_current_format()
             logger.debug("🎨 Format state initialized for new print job")
 
-            # Process each element
-            qr_printed = False
+            # Process each element exactly like ESP32 firmware
+            qr_already_printed = False
+            last_order_id = ""
+            current_page = 1
+            total_pages = 1
+            
             for i, element in enumerate(receipt_data):
-                try:
-                    if isinstance(element, str):
-                        # Text line
-                        self._print_text_line(element)
+                logger.debug(f"🔍 Processing element {i}: {type(element)}")
+                
+                # Handle JSON objects (formatting and metadata)
+                if isinstance(element, dict):
+                    # Check for page metadata (like ESP32 firmware)
+                    if "page" in element and "of" in element:
+                        current_page = element.get("page", 1)
+                        total_pages = element.get("of", 1)
+                        logger.debug(f"📄 Page metadata: {current_page}/{total_pages}")
+                        continue  # Skip printing this meta line
+                    
+                    # Apply formatting if present (like ESP32 applyShortFormat)
+                    if "f" in element:
+                        self._apply_short_format(element)
+                    
+                    # Extract order ID from metadata
+                    if "m" in element and "order_id" in element["m"]:
+                        last_order_id = element["m"]["order_id"]
+                        logger.debug(f"📋 Order ID extracted: {last_order_id}")
+                    
+                    # Handle QR codes (like ESP32 firmware QR processing)
+                    if not qr_already_printed:
+                        if "qr_bitmap" in element:
+                            logger.debug("🔲 QR bitmap detected - converting to built-in QR")
+                            qr_url = f"https://scandeer.com/order/{last_order_id}"
+                            qr_size = element.get("qr_size", 10)
+                            qr_align = element.get("qr_alignment", "center")
+                            self._print_qr_code(qr_url, qr_size, qr_align)
+                            qr_already_printed = True
+                        elif "qr_image_url" in element:
+                            logger.debug("🖼️ QR image URL detected")
+                            qr_url = element["qr_image_url"]
+                            qr_size = element.get("qr_size", 10)
+                            qr_align = element.get("qr_alignment", "center")
+                            self._print_qr_code(qr_url, qr_size, qr_align)
+                            qr_already_printed = True
+                        elif "qr_url" in element:
+                            logger.debug("🌐 QR URL detected")
+                            qr_url = element["qr_url"]
+                            qr_size = element.get("qr_size", 10)
+                            qr_align = element.get("qr_alignment", "center")
+                            self._print_qr_code(qr_url, qr_size, qr_align)
+                            qr_already_printed = True
+                        elif "qr" in element:
+                            logger.debug("🔲 Legacy QR detected")
+                            if isinstance(element["qr"], str):
+                                self._print_qr_code(element["qr"], 10, "center")
+                            elif isinstance(element["qr"], dict):
+                                qr_obj = element["qr"]
+                                if "text" in qr_obj:
+                                    self._print_qr_code(qr_obj["text"], 10, "center")
+                                elif "url" in qr_obj:
+                                    self._print_qr_code(qr_obj["url"], 10, "center")
+                            qr_already_printed = True
+                
+                # Handle text strings (like ESP32 firmware text processing)
+                elif isinstance(element, str):
+                    # Filter QR URL text (like ESP32 firmware)
+                    if element.startswith("QR:"):
+                        logger.debug(f"🚫 Filtered QR URL text: {element}")
+                        continue  # Skip this line - don't print QR URLs as text
+                    
+                    # Apply current persistent formatting before printing text (like ESP32)
+                    self._apply_current_format()
+                    self._print_text_line(element)
+                    logger.debug(f"📝 Text printed with format - Align: {self.formatter.current_align}, Bold: {self.formatter.current_bold}, Size: {self.formatter.current_size}")
 
-                    elif isinstance(element, dict):
-                        # Format or command object
-                        if "f" in element:
-                            # Format command
-                            self._apply_format(element)
-
-                        elif "line" in element:
-                            # Line drawing command
-                            self._print_line(element)
-
-                        elif any(qr_key in element for qr_key in ["qr_bitmap", "qr_url", "qr"]):
-                            # QR code command
-                            if not qr_printed:  # Prevent duplicate QR codes
-                                self._print_qr_code(element)
-                                qr_printed = True
-
-                        elif "m" in element and "order_id" in element["m"]:
-                            # Metadata (usually page info)
-                            logger.debug(f"📄 Receipt metadata", order_id=element["m"]["order_id"])
-
-                        else:
-                            logger.debug(f"🔍 Unknown element type: {element}")
-
-                except Exception as e:
-                    logger.error(f"❌ Error processing element {i}: {str(e)}")
-                    continue
-
-            # Final formatting and cut
-            self._finalize_receipt()
-
-            # Flush/send the print job to the printer
+            # Flush any remaining print data
             self._flush_print_job()
-
-            # Update statistics
-            self.print_stats["total_jobs"] += 1
-            self.print_stats["successful_jobs"] += 1
-            self.print_stats["last_print_time"] = time.time()
-
-            logger.info(f"✅ Receipt printed successfully")
+            
+            logger.debug("✅ Receipt printing completed successfully")
             return True
 
         except Exception as e:
-            logger.error(f"❌ Print error: {str(e)}")
-            self.print_stats["total_jobs"] += 1
-            self.print_stats["failed_jobs"] += 1
+            logger.error(f"❌ Print receipt error: {str(e)}")
+            import traceback
+            logger.error(f"❌ Stack trace: {traceback.format_exc()}")
             return False
+
+    def _apply_short_format(self, element: dict):
+        """
+        Apply short format changes exactly like ESP32 firmware applyShortFormat.
+        
+        Args:
+            element: JSON object with 'f' formatting key
+        """
+        if "f" not in element:
+            return
+            
+        fmt = element["f"]
+        changes = {}
+        
+        # Handle alignment (like ESP32 firmware)
+        if "a" in fmt:
+            align_char = fmt["a"]
+            # Handle both uppercase and lowercase alignment codes (like ESP32)
+            if align_char.lower() == 'c':
+                align_char = 'C'
+            elif align_char.lower() == 'l':
+                align_char = 'L'
+            elif align_char.lower() == 'r':
+                align_char = 'R'
+            
+            if align_char != self.formatter.current_align:
+                self.formatter.current_align = align_char
+                changes["align"] = align_char
+                logger.debug(f"🎨 Format: Alignment changed to {align_char}")
+        
+        # Handle bold (like ESP32 firmware)
+        if "b" in fmt:
+            bold_val = fmt["b"]
+            if bold_val != self.formatter.current_bold:
+                self.formatter.current_bold = bold_val
+                changes["bold"] = bold_val
+                logger.debug(f"🎨 Format: Bold changed to {'ON' if bold_val else 'OFF'}")
+        
+        # Handle size (like ESP32 firmware)
+        if "s" in fmt:
+            size_val = fmt["s"]
+            if size_val != self.formatter.current_size:
+                self.formatter.current_size = size_val
+                changes["size"] = size_val
+                logger.debug(f"🎨 Format: Size changed to {size_val}")
+        
+        # Apply changes to printer immediately (like ESP32 firmware)
+        if changes:
+            self._apply_current_format()
+
+    def _apply_current_format(self):
+        """
+        Apply current persistent formatting state to printer (like ESP32 applyCurrentFormat).
+        """
+        # Set alignment
+        if self.formatter.current_align == 'C':
+            self.printer.set_with_default(align='center')
+        elif self.formatter.current_align == 'R':
+            self.printer.set_with_default(align='right')
+        else:
+            self.printer.set_with_default(align='left')
+
+        # Set bold
+        if self.formatter.current_bold:
+            self.printer.set_with_default(bold=True)
+        else:
+            self.printer.set_with_default(bold=False)
+
+        # Set size
+        if self.formatter.current_size == 2:
+            self.printer.set_with_default(double_height=True, double_width=True)
+        elif self.formatter.current_size == 0:
+            self.printer.set_with_default(double_height=False, double_width=False, width=1, height=1)
+        else:
+            self.printer.set_with_default(double_height=False, double_width=False)
 
     def _print_text_line(self, text: str):
         """Print a text line with current formatting (like ESP32 firmware)."""
@@ -265,43 +362,6 @@ class USBPrinterManager:
         logger.debug(f"📝 Text printed with format - Align: {self.formatter.current_align}, "
                     f"Bold: {'ON' if self.formatter.current_bold else 'OFF'}, "
                     f"Size: {self.formatter.current_size}")
-
-    def _apply_current_format(self):
-        """Apply current persistent formatting state (like ESP32 firmware applyCurrentFormat)."""
-        # This function mirrors the ESP32 firmware's applyCurrentFormat() function
-        
-        # Apply alignment
-        if isinstance(self.printer, NamedPrinterWrapper):
-            # Use direct ESC/POS commands for named printers
-            self.printer.justify(self.formatter.current_align)
-            
-            # Apply bold
-            if self.formatter.current_bold:
-                self.printer.bold_on()
-            else:
-                self.printer.bold_off()
-                
-            # Apply size
-            self.printer.set_size(self.formatter.current_size)
-        else:
-            # Use python-escpos methods for USB printers
-            if self.formatter.current_align == 'C':
-                self.printer.set_with_default(align='center')
-            elif self.formatter.current_align == 'R':
-                self.printer.set_with_default(align='right')
-            else:
-                self.printer.set_with_default(align='left')
-
-            # Apply text styling
-            self.printer.set_with_default(bold=self.formatter.current_bold)
-
-            # Apply size
-            if self.formatter.current_size == 2:
-                self.printer.set_with_default(double_height=True, double_width=True)
-            elif self.formatter.current_size == 0:
-                self.printer.set_with_default(double_height=False, double_width=False)
-            else:
-                self.printer.set_with_default(double_height=False, double_width=False)
 
     def _apply_format(self, format_element: Dict[str, Any]):
         """Apply formatting changes (like ESP32 firmware applyShortFormat)."""
@@ -339,58 +399,52 @@ class USBPrinterManager:
 
         logger.debug(f"📏 Line printed", type=line_config["type"], width=line_config["width"])
 
-    def _print_qr_code(self, qr_element: Dict[str, Any]):
-        """Print QR code element."""
-        qr_data = parse_qr_command(qr_element)
-
-        if not qr_data:
-            logger.warning("⚠️ Invalid QR code data")
-            return
-
+    def _print_qr_code(self, qr_data: str, size: int = 10, alignment: str = "center"):
+        """
+        Print QR code with specified parameters (like ESP32 firmware QR handling).
+        
+        Args:
+            qr_data: QR code data/URL
+            size: QR code size
+            alignment: QR code alignment
+        """
         try:
+            logger.debug(f"🔲 Printing QR code: {qr_data[:50]}...")
+            
             # Save current formatting state
             saved_align = self.formatter.current_align
+            saved_bold = self.formatter.current_bold
+            saved_size = self.formatter.current_size
             
             # Set QR alignment
-            qr_align = 'C'  # Default center
-            if qr_data["alignment"] == "right":
-                qr_align = 'R'
-            elif qr_data["alignment"] == "left":
-                qr_align = 'L'
-            
-            # Temporarily change alignment for QR
-            self.formatter.current_align = qr_align
-            
-            if isinstance(self.printer, NamedPrinterWrapper):
-                self.printer.justify(qr_align)
+            if alignment == "left":
+                self.formatter.current_align = 'L'
+            elif alignment == "right":
+                self.formatter.current_align = 'R'
             else:
-                if qr_align == 'C':
-                    self.printer.set_with_default(align='center')
-                elif qr_align == 'R':
-                    self.printer.set_with_default(align='right')
-                else:
-                    self.printer.set_with_default(align='left')
-
-            if qr_data["type"] == "bitmap":
-                # Print bitmap QR code
-                self._print_qr_bitmap(qr_data)
+                self.formatter.current_align = 'C'
+            
+            self._apply_current_format()
+            
+            # Print QR code using the printer's QR capability
+            if hasattr(self.printer, 'qr'):
+                self.printer.qr(qr_data, size=size, center=(alignment == "center"))
             else:
-                # Print URL QR code using ESC/POS QR command
-                self._print_qr_url(qr_data)
-
-            # Restore current formatting state (like ESP32 firmware)
+                # Fallback: print QR as text
+                self.printer.text(f"\nQR Code: {qr_data}\n")
+            
+            # Restore formatting state (like ESP32 firmware)
             self.formatter.current_align = saved_align
+            self.formatter.current_bold = saved_bold
+            self.formatter.current_size = saved_size
             self._apply_current_format()
-
-            logger.debug(f"🔲 QR code printed", type=qr_data["type"], size=qr_data["size"])
-
-        except Exception as e:
-            logger.error(f"❌ QR print error: {str(e)}")
-            # Fallback: print QR URL as text
-            self.printer.text("QR Code: " + qr_data.get("url", "N/A") + "\n")
             
-            # Restore formatting after error
-            self._apply_current_format()
+            logger.debug("✅ QR code printed successfully")
+            
+        except Exception as e:
+            logger.error(f"❌ QR code print error: {str(e)}")
+            # Fallback: print QR URL as text
+            self.printer.text("QR Code: " + qr_data + "\n")
 
     def _print_qr_bitmap(self, qr_data: Dict[str, Any]):
         """Print QR code from bitmap data."""
