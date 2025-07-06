@@ -458,8 +458,8 @@ class USBPrinterManager:
             total_bytes = bytes_per_row * thickness
             line_data = bytearray([0xFF] * total_bytes)  # 0xFF = all pixels black
             
-            # Add spacing above
-            self.printer.text("\n")
+            # Add minimal spacing above (1/2 line using ESC/POS line feed)
+            self.printer._raw(bytes([0x1B, ord('d'), 1]))  # ESC d 1 = 1 line feed
             
             # Send ESC/POS raster bitmap command: GS v 0
             cmd = bytes([0x1D, ord('v'), ord('0'), 0, bytes_per_row, 0, thickness, 0])
@@ -468,8 +468,8 @@ class USBPrinterManager:
             # Send bitmap data
             self.printer._raw(line_data)
             
-            # Add spacing below
-            self.printer.text("\n")
+            # Add minimal spacing below (1/2 line using ESC/POS line feed)
+            self.printer._raw(bytes([0x1B, ord('d'), 1]))  # ESC d 1 = 1 line feed
             
             logger.debug("✅ Solid line printed using ESC/POS bitmap")
             
@@ -503,8 +503,8 @@ class USBPrinterManager:
                         if pixel_pos < dot_size:
                             line_data[byte_index] |= (0x80 >> bit)  # Set bit (black pixel)
             
-            # Add spacing above
-            self.printer.text("\n")
+            # Add minimal spacing above (1/2 line using ESC/POS line feed)
+            self.printer._raw(bytes([0x1B, ord('d'), 1]))  # ESC d 1 = 1 line feed
             
             # Send ESC/POS raster bitmap command: GS v 0
             cmd = bytes([0x1D, ord('v'), ord('0'), 0, bytes_per_row, 0, dot_size, 0])
@@ -513,8 +513,8 @@ class USBPrinterManager:
             # Send bitmap data
             self.printer._raw(line_data)
             
-            # Add spacing below
-            self.printer.text("\n")
+            # Add minimal spacing below (1/2 line using ESC/POS line feed)
+            self.printer._raw(bytes([0x1B, ord('d'), 1]))  # ESC d 1 = 1 line feed
             
             logger.debug("✅ Dotted line printed using ESC/POS bitmap")
             
@@ -620,29 +620,11 @@ class USBPrinterManager:
             data_bytes = data.encode('utf-8')
             data_len = len(data_bytes)
             
-            # ESC/POS QR Code commands (exactly like ESP32 firmware)
-            cn = 49  # QR Code function group
-            
-            # Set QR code size (Function 167) - size 6 like firmware
-            size_cmd = bytes([0x1D, ord('('), ord('k'), 0x03, 0x00, cn, 167, 6])
-            self.printer._raw(size_cmd)
-            
-            # Set error correction level (Function 169) - Level L like firmware
-            error_cmd = bytes([0x1D, ord('('), ord('k'), 0x03, 0x00, cn, 169, 0x30])
-            self.printer._raw(error_cmd)
-            
-            # Store QR data (Function 180)
-            store_cmd = bytes([0x1D, ord('('), ord('k'), 
-                             (data_len + 3) & 0xFF, ((data_len + 3) >> 8) & 0xFF,
-                             cn, 180, 0x30]) + data_bytes
-            self.printer._raw(store_cmd)
-            
-            # Print QR code (Function 181)
-            print_cmd = bytes([0x1D, ord('('), ord('k'), 0x03, 0x00, cn, 181, 0x30])
-            self.printer._raw(print_cmd)
-            
-            # Add spacing like firmware
-            self.printer.text("\n\n")
+            # This printer may not support ESC/POS QR commands via lp
+            # Print URL as text since QR graphics cause issues
+            logger.info("Printing QR as text URL (printer compatibility)")
+            self.printer.text(f"{data}\n")
+            self.printer.text("(Scan with phone camera)\n\n")
             
             # Reset alignment to left
             self.printer.justify('L')
