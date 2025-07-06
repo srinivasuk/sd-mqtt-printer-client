@@ -1,0 +1,3 @@
+#!/bin/bash
+# Test script - works like poetry run test
+poetry run python test_setup.py

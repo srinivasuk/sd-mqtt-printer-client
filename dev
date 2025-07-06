@@ -1,0 +1,3 @@
+#!/bin/bash
+# Dev script - works like poetry run dev
+poetry run python main.py

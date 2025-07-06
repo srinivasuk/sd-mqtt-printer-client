@@ -139,7 +139,22 @@ class MQTTClient:
         """Handle MQTT disconnection callback."""
         self.is_connected = False
         if rc != 0:
-            logger.warning(f"⚠️ MQTT unexpected disconnection: {rc}")
+            logger.warning(f"⚠️ MQTT unexpected disconnection (code: {rc})")
+            # Common disconnect reason codes
+            if rc == 1:
+                logger.warning("   Reason: Incorrect protocol version")
+            elif rc == 2:
+                logger.warning("   Reason: Invalid client identifier")
+            elif rc == 3:
+                logger.warning("   Reason: Server unavailable")
+            elif rc == 4:
+                logger.warning("   Reason: Bad username or password")
+            elif rc == 5:
+                logger.warning("   Reason: Not authorized")
+            elif rc == 7:
+                logger.warning("   Reason: Connection lost")
+            else:
+                logger.warning(f"   Reason: Unknown error code {rc}")
         else:
             logger.info("🔌 MQTT disconnected gracefully")
 
@@ -248,18 +263,37 @@ class MQTTClient:
     def _send_heartbeat(self):
         """Send heartbeat message to server."""
         try:
-            # Create simplified heartbeat message to avoid disconnection issues
+            # Get printer status to match ESP32 firmware format
+            printer_status = printer_manager.get_status()
+            
+            # Get system network information
+            local_ip = self._get_local_ip()
+            wifi_rssi = self._get_wifi_signal_strength()
+            
+            # Create comprehensive heartbeat message matching ESP32 firmware format EXACTLY
             heartbeat_data = {
-                "timestamp": int(time.time() * 1000),  # Milliseconds
                 "printer_id": config.PRINTER_ID,
-                "status": "ready",
-                "online": True
+                "timestamp": int(time.time() * 1000),  # Milliseconds like ESP32
+                "esp32_status": "online",  # Mac client is online if sending this
+                "printer_online": printer_status["printer_online"],
+                "printer_status": printer_status["printer_status"],
+                "details": {
+                    "paper_present": printer_status.get("paper_present", True),
+                    "cover_closed": printer_status.get("cover_closed", True),
+                    "cutter_ok": printer_status.get("cutter_ok", True),
+                    "wifi_connected": True,  # Mac client uses WiFi/Ethernet
+                    "mqtt_connected": self.is_connected,
+                    "free_heap": self._get_system_memory(),
+                    "uptime_ms": int(time.time() * 1000),
+                    "wifi_rssi": wifi_rssi,
+                    "local_ip": local_ip
+                }
             }
 
             # Send heartbeat
             self._publish(config.TOPIC_HEARTBEAT, heartbeat_data)
 
-            logger.debug(f"💓 Heartbeat sent")
+            logger.info(f"💓 Heartbeat sent to {config.TOPIC_HEARTBEAT}")
 
         except Exception as e:
             logger.error(f"❌ Heartbeat error: {str(e)}")
@@ -362,6 +396,10 @@ class MQTTClient:
 
     def _heartbeat_loop(self):
         """Heartbeat loop thread."""
+        # Send first heartbeat immediately
+        self._send_heartbeat()
+        self.last_heartbeat = time.time()
+        
         while self.running and self.is_connected:
             try:
                 current_time = time.time()
@@ -386,6 +424,35 @@ class MQTTClient:
             return int(memory.available / 1024 / 1024)  # MB
         except Exception:
             return 0
+
+    def _get_local_ip(self) -> str:
+        """Get local IP address."""
+        try:
+            import socket
+            # Connect to a remote address to determine local IP
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+                s.connect(("8.8.8.8", 80))
+                return s.getsockname()[0]
+        except Exception:
+            return "127.0.0.1"
+
+    def _get_wifi_signal_strength(self) -> int:
+        """Get WiFi signal strength (Mac specific)."""
+        try:
+            import subprocess
+            result = subprocess.run([
+                "/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport",
+                "-I"
+            ], capture_output=True, text=True)
+            
+            if result.returncode == 0:
+                for line in result.stdout.split('\n'):
+                    if 'agrCtlRSSI' in line:
+                        rssi = int(line.split(':')[1].strip())
+                        return rssi
+        except Exception:
+            pass
+        return -50  # Default reasonable value
 
     def get_connection_info(self) -> dict:
         """Get connection information."""
