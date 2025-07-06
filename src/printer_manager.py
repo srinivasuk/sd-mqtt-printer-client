@@ -601,64 +601,37 @@ class USBPrinterManager:
 
     def _print_qr_code_builtin(self, data, size=10, alignment="center"):
         """
-        Print QR code using built-in ESC/POS QR commands like ESP32 firmware.
-        This is the method that actually works in the ESP32 firmware.
+        Print QR code using ESC/POS QR commands like ESP32 firmware.
         """
         try:
-            logger.debug(f"🔲 Printing QR using built-in ESC/POS method")
-            logger.debug(f"🔲 Data: {data}")
-            logger.debug(f"🔲 Size: {size}, Alignment: {alignment}")
+            logger.info(f"🔲 Printing QR using ESC/POS QR commands like firmware")
+            logger.info(f"🔲 Data: {data}")
             
-            # Map alignment to ESC/POS codes
-            align_code = 1  # Center by default
-            if alignment == "left":
-                align_code = 0
+            # Set alignment for QR code
+            if alignment == "center":
+                self.printer.justify('C')
             elif alignment == "right":
-                align_code = 2
-            elif alignment == "center":
-                align_code = 1
-            
-            # Set alignment
-            self.printer._raw(bytes([0x1B, ord('a'), align_code]))
-            
-            # Map UI size to thermal printer QR size (like ESP32 firmware)
-            thermal_size = size
-            if size <= 4:
-                thermal_size = 3   # Small
-            elif size <= 8:
-                thermal_size = 6   # Medium  
-            elif size <= 12:
-                thermal_size = 10  # Large
+                self.printer.justify('R')
             else:
-                thermal_size = 12  # Extra Large
-                
-            # Validate size range (1-16 for most thermal printers)
-            if thermal_size < 1:
-                thermal_size = 1
-            if thermal_size > 16:
-                thermal_size = 16
-                
-            logger.debug(f"🔲 Mapped size {size} to thermal size {thermal_size}")
+                self.printer.justify('L')
             
-            # Validate data length
+            # Use ESC/POS QR commands exactly like ESP32 firmware
+            # This should work without garbled text since it's native printer commands
             data_bytes = data.encode('utf-8')
-            if len(data_bytes) > 200:
-                logger.warning("QR data too long, truncating to 200 bytes")
-                data_bytes = data_bytes[:200]
+            data_len = len(data_bytes)
             
-            # ESC/POS QR Code commands (like ESP32 firmware)
+            # ESC/POS QR Code commands (exactly like ESP32 firmware)
             cn = 49  # QR Code function group
             
-            # Set QR code size (Function 167)
-            size_cmd = bytes([0x1D, ord('('), ord('k'), 0x03, 0x00, cn, 167, thermal_size])
+            # Set QR code size (Function 167) - size 6 like firmware
+            size_cmd = bytes([0x1D, ord('('), ord('k'), 0x03, 0x00, cn, 167, 6])
             self.printer._raw(size_cmd)
             
-            # Set error correction level (Function 169) - Level H (30%)
-            error_cmd = bytes([0x1D, ord('('), ord('k'), 0x03, 0x00, cn, 169, 0x33])
+            # Set error correction level (Function 169) - Level L like firmware
+            error_cmd = bytes([0x1D, ord('('), ord('k'), 0x03, 0x00, cn, 169, 0x30])
             self.printer._raw(error_cmd)
             
             # Store QR data (Function 180)
-            data_len = len(data_bytes)
             store_cmd = bytes([0x1D, ord('('), ord('k'), 
                              (data_len + 3) & 0xFF, ((data_len + 3) >> 8) & 0xFF,
                              cn, 180, 0x30]) + data_bytes
@@ -668,17 +641,19 @@ class USBPrinterManager:
             print_cmd = bytes([0x1D, ord('('), ord('k'), 0x03, 0x00, cn, 181, 0x30])
             self.printer._raw(print_cmd)
             
-            # Add some spacing after QR code
+            # Add spacing like firmware
             self.printer.text("\n\n")
             
             # Reset alignment to left
-            self.printer._raw(bytes([0x1B, ord('a'), 0]))
+            self.printer.justify('L')
             
-            logger.debug("✅ Built-in ESC/POS QR code printed")
+            logger.info("✅ ESC/POS QR code printed successfully")
             return True
             
         except Exception as e:
-            logger.error(f"Error printing built-in QR code: {e}")
+            logger.error(f"Error printing ESC/POS QR code: {e}")
+            # No fallback - just skip QR if it fails
+            logger.info("Skipping QR code to avoid garbled text")
             return False
 
     def _print_qr_url_real(self, qr_data: Dict[str, Any]) -> bool:
@@ -944,6 +919,7 @@ class NamedPrinterWrapper:
         
         # Track formatting state like ESP32 firmware
         self.current_align = 'L'  # L=Left, C=Center, R=Right
+        self.current_alignment = 'left'  # For compatibility with QR code method
         self.current_bold = False
         self.current_size = 1     # 1=Normal, 2=Large, 0=Small
         self.current_font = 'A'   # A or B
@@ -1014,6 +990,14 @@ class NamedPrinterWrapper:
         if alignment != self.current_align:
             self.current_align = alignment
             
+            # Update compatibility alignment too
+            if alignment == 'L':
+                self.current_alignment = 'left'
+            elif alignment == 'C':
+                self.current_alignment = 'center'
+            elif alignment == 'R':
+                self.current_alignment = 'right'
+            
             # ESC a n - Set justification
             if alignment == 'C':
                 self._raw(bytes([self.ESC, ord('a'), 0x01]))  # Center
@@ -1021,6 +1005,17 @@ class NamedPrinterWrapper:
                 self._raw(bytes([self.ESC, ord('a'), 0x02]))  # Right
             else:
                 self._raw(bytes([self.ESC, ord('a'), 0x00]))  # Left
+
+    def set_alignment(self, alignment: str):
+        """Set alignment using common names (for QR code compatibility)."""
+        if alignment == 'left':
+            self.justify('L')
+        elif alignment == 'center':
+            self.justify('C')
+        elif alignment == 'right':
+            self.justify('R')
+        else:
+            self.justify('L')
 
     def bold_on(self):
         """Turn on bold text."""
@@ -1101,7 +1096,7 @@ class NamedPrinterWrapper:
                 self.text(f"QR: {text}\n")
 
     def _generate_qr_characters(self, text: str, size: int) -> bool:
-        """Generate QR code using simple ASCII characters that work with all printers."""
+        """Generate QR code using only safe ASCII characters to avoid garbled text."""
         try:
             import qrcode
             
@@ -1118,17 +1113,24 @@ class NamedPrinterWrapper:
             # Get QR code matrix
             matrix = qr.get_matrix()
             
-            # Print QR code using simple ASCII characters that work on all printers
+            # Store current alignment and set to center for QR
+            current_alignment = self.current_alignment
+            self.set_alignment('center')
+            
+            # Print QR code using only safe ASCII characters
             for row in matrix:
                 line = ""
                 for module in row:
                     if module:
-                        line += "##"  # Double hash for black pixels - more visible
+                        line += "XX"  # Use XX for black pixels - guaranteed to work
                     else:
                         line += "  "  # Double space for white pixels
                 
-                # Print the line directly without special formatting
+                # Print the line with current formatting
                 self.text(line + "\n")
+            
+            # Restore previous alignment
+            self.set_alignment(current_alignment)
             
             # Add spacing
             self.text("\n")
@@ -1223,31 +1225,15 @@ class NamedPrinterWrapper:
             self._raw(bytes([self.LF]))
 
     def cut(self):
-        """Cut paper using multiple ESC/POS cut commands for better compatibility."""
-        # Add some space before cutting
+        """Cut paper using single clean cut command."""
+        # Add space before cutting
         self._raw(bytes([self.LF, self.LF, self.LF]))
         
-        # Try multiple cut commands for better compatibility
-        try:
-            # Method 1: GS V 0 - Full cut
-            self._raw(bytes([self.GS, ord('V'), 0x00]))
-        except:
-            pass
+        # Single clean cut command - GS V 0 (Full cut)
+        self._raw(bytes([self.GS, ord('V'), 0x00]))
         
-        try:
-            # Method 2: GS V 1 - Partial cut (more compatible)
-            self._raw(bytes([self.GS, ord('V'), 0x01]))
-        except:
-            pass
-        
-        try:
-            # Method 3: ESC d n - Feed and cut
-            self._raw(bytes([self.ESC, ord('d'), 3]))
-        except:
-            pass
-        
-        # Add more space to ensure cut happens
-        self._raw(bytes([self.LF, self.LF, self.LF]))
+        # Small space after cut
+        self._raw(bytes([self.LF, self.LF]))
 
     def _raw(self, data: bytes):
         """Send raw data to printer buffer."""
